@@ -40,7 +40,7 @@ app.post('/update', async (req, res) => {
         return res.status(400).send("Missing device ID");
     }
 
-    console.log("📡 Received sensor data:", req.body);
+    console.log("Received sensor data:", req.body);
 
     // Scoring logic needs to be edited
     const score = (100 - Math.abs(temperature - 25)) + (humidity / 2) + (moisture / 10);
