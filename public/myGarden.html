@@ -15,9 +15,26 @@
         <div class="navbar-logo">
             <a href="index.html">SproutEd</a>
         </div>
-        <div class="navbar-links">
+        
+        <!-- Hamburger icon (hidden on desktop) -->
+        <div class="navbar-toggle" id="navbar-toggle">
+            ☰
+        </div>
+    
+        <div class="navbar-links" id="navbar-links">
             <a href="index.html">About</a>
             <a href="leaderboard.html">Leaderboard</a>
             <a href="myGarden.html">My Garden</a>
         </div>
     </div>
+
+    <script>
+        const toggleBtn = document.getElementById('navbar-toggle');
+        const navLinks = document.getElementById('navbar-links');
+    
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
+
+</body>
