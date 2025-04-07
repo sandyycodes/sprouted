@@ -1,14 +1,23 @@
 let allData = [];
+let currentView = 'top5'; // 'top5' or 'all'
 
 async function fetchLeaderboard() {
     try {
         const response = await fetch('/leaderboard');
         const data = await response.json();
-        allData = data; // Store full data for toggling
+        allData = data;
 
-        renderLeaderboard(data.slice(0, 5)); // Show top 5 by default
+        updateLeaderboardView(); // Keep view consistent with user selection
     } catch (error) {
         console.error("Error fetching leaderboard:", error);
+    }
+}
+
+function updateLeaderboardView() {
+    if (currentView === 'top5') {
+        renderLeaderboard(allData.slice(0, 5));
+    } else {
+        renderLeaderboard(allData);
     }
 }
 
@@ -30,20 +39,19 @@ function renderLeaderboard(data) {
 
 // Button click handlers
 document.getElementById('top5-btn').addEventListener('click', function () {
-    renderLeaderboard(allData.slice(0, 5));
+    currentView = 'top5';
+    updateLeaderboardView();
     this.classList.add('active');
     document.getElementById('all-btn').classList.remove('active');
 });
 
 document.getElementById('all-btn').addEventListener('click', function () {
-    renderLeaderboard(allData);
+    currentView = 'all';
+    updateLeaderboardView();
     this.classList.add('active');
     document.getElementById('top5-btn').classList.remove('active');
 });
 
-// Refresh leaderboard every 5 sec
-setInterval(fetchLeaderboard, 5000);
-
-// Initial fetch
+// Initial fetch + periodic refresh
 fetchLeaderboard();
-
+setInterval(fetchLeaderboard, 5000);
