@@ -4,23 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>About SproutEd</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
-    <!-- Navigation Bar -->
     <div class="navbar">
         <div class="navbar-logo">
             <a href="index.html">SproutEd</a>
         </div>
-        
-        <!-- Hamburger icon (hidden on desktop) -->
-        <div class="navbar-toggle" id="navbar-toggle">
-            ☰
-        </div>
-    
+        <div class="navbar-toggle" id="navbar-toggle">☰</div>
         <div class="navbar-links" id="navbar-links">
             <a href="index.html">About</a>
             <a href="leaderboard.html">Leaderboard</a>
@@ -28,13 +21,51 @@
         </div>
     </div>
 
+    <div class="about-hero">
+        <div class="about-hero-image"></div>
+        <div class="about-hero-text">
+            <h1>Growing More, Wasting Less</h1>
+            <p>SproutEd is a hands-on plant kit and STEM challenge that helps students build better habits around food through gardening and play.</p>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>Our Mission</h2>
+        <p>SproutEd started as a way to rethink food education and combat food waste by reconnecting students with the source of their food. It’s a tool to make healthy eating habits more approachable, gardening more rewarding, and sustainable practices easier.</p>
+    </div>
+
+    <div class="about-section">
+        <h2>How It Works</h2>
+        <p>Each SproutEd kit includes everything you need to start growing your own plant and to compete on a live leaderboard. Sensor data from the plant updates in real-time, helping students stay engaged and motivated to care for their plant.</p>
+    </div>
+
+    <div class="about-cards-row">
+        <div class="about-card">
+            <div class="about-card-image"></div>
+            <p>Build Your Kit</p>
+        </div>
+        <div class="about-card">
+            <div class="about-card-image"></div>
+            <p>Track Your Progress</p>
+        </div>
+        <div class="about-card">
+            <div class="about-card-image"></div>
+            <p>Compete & Learn</p>
+        </div>
+    </div>
+
+    <div class="about-cta">
+        <a href="leaderboard.html" class="wide-btn">View Leaderboard</a>
+        <a href="myGarden.html" class="wide-btn">Learn More</a>
+    </div>
+
     <script>
         const toggleBtn = document.getElementById('navbar-toggle');
         const navLinks = document.getElementById('navbar-links');
-    
         toggleBtn.addEventListener('click', () => {
             navLinks.classList.toggle('show');
         });
     </script>
-
 </body>
+
+</html>

@@ -31,6 +31,7 @@ const leaderboardSchema = new mongoose.Schema({
 }, { collection: 'leaderboard' });
 
 const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
+  
 
 // Endpoint to receive data from ESP32
 app.post('/update', async (req, res) => {
