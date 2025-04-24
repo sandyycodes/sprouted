@@ -426,6 +426,18 @@ select {
   font-size: 16px;
 }
 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 64px;
+  width: 100%;
+}
+
+.card-item {
+  grid-column: span 1;
+}
+
 
 @media (max-width: 768px) {
   :root {
@@ -502,6 +514,11 @@ select {
   .garden-card {
     margin-bottom: 32px;
   }
+
+  .garden-card-wrapper {
+    grid-column: span 12 !important;
+  }
+
 }
 
 @media (max-width: 400px) {
