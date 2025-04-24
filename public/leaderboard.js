@@ -72,12 +72,54 @@ function renderLeaderboard(data) {
 
   // Update last updated time
   const lastUpdatedEl = document.getElementById('last-updated');
-  if (data[0]?.lastUpdated) {
-    const updatedDate = new Date(data[0].lastUpdated);
-    lastUpdatedEl.textContent = `Last Updated: ${updatedDate.toLocaleString()}`;
-  } else {
-    lastUpdatedEl.textContent = `Last Updated: --`;
-  }
+let latestTimestamp = null;
+
+// Determine latest valid timestamp
+if (data.length > 0) {
+  latestTimestamp = data.reduce((latest, entry) => {
+    const ts = new Date(entry.lastUpdated);
+    return (!isNaN(ts) && (!latest || ts > latest)) ? ts : latest;
+  }, null);
+}
+
+// Get user's time zone
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+// Map IANA zones to simple labels
+const zoneMap = {
+  'America/New_York': 'ET',
+  'America/Chicago': 'CT',
+  'America/Denver': 'MT',
+  'America/Los_Angeles': 'PT',
+  'America/Phoenix': 'MT',
+  'America/Anchorage': 'AKT',
+  'Pacific/Honolulu': 'HT',
+  // Add more mappings as needed
+};
+
+const shortLabel = zoneMap[timeZone] || timeZone; // Fallback to full name if not mapped
+
+const options = {
+  timeZone: timeZone,
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: true,
+};
+
+// Final output
+if (latestTimestamp) {
+  lastUpdatedEl.textContent = `Last Updated: ${latestTimestamp.toLocaleString('en-US', options)} ${shortLabel}`;
+} else {
+  const now = new Date();
+  lastUpdatedEl.textContent = `Last Updated: ${now.toLocaleString('en-US', options)} ${shortLabel}`;
+}
+
+
+
 }
 
 
