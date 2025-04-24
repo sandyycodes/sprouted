@@ -168,6 +168,19 @@ body {
   color: white;
 }
 
+.tab-button[data-plant="tomato"]:hover {
+  background-color: #f1a5aa; /* lighter tomato shade */
+}
+
+.tab-button[data-plant="basil"]:hover {
+  background-color: #f8c689; /* lighter basil shade */
+}
+
+.tab-button[data-plant="spinach"]:hover {
+  background-color: #a3b18a; /* lighter spinach shade */
+}
+
+
 .toggle-buttons {
   display: flex;
   gap: 8px;
