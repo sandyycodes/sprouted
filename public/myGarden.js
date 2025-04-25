@@ -1,69 +1,73 @@
+// myGarden.js
+
 document.addEventListener("DOMContentLoaded", function () {
     const registerForm = document.getElementById("registerForm");
+    const checkForm = document.getElementById("checkForm");
+  
+    const moistureDisplay = document.getElementById("moistureData");
+    const humidityDisplay = document.getElementById("humidityData");
+    const tempDisplay = document.getElementById("tempData");
   
     let resetAfterClose = false;
   
     // Modal creation
     const modal = document.createElement("div");
     modal.id = "confirmation-modal";
-    modal.style.position = "fixed";
-    modal.style.top = "50%";
-    modal.style.left = "50%";
-    modal.style.transform = "translate(-50%, -50%)";
-    modal.style.backgroundColor = "white";
-    modal.style.padding = "32px";
-    modal.style.border = "2px solid #ccc";
-    modal.style.borderRadius = "16px";
-    modal.style.zIndex = "1000";
-    modal.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.25)";
-    modal.style.width = "400px";
-    modal.style.minHeight = "220px";
-    modal.style.textAlign = "center";
-    modal.style.display = "none";
-    modal.style.maxWidth = "90vw";
+    modal.style = `
+      position: fixed;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: white;
+      padding: 32px;
+      border: 2px solid #ccc;
+      border-radius: 16px;
+      z-index: 1000;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+      width: 400px; max-width: 90vw; min-height: 220px;
+      text-align: center;
+      display: none;
+    `;
   
-    // Modal title
     const titleEl = document.createElement("h2");
     titleEl.id = "modal-title";
-    titleEl.style.marginBottom = "12px";
-    titleEl.style.fontSize = "22px";
-    titleEl.style.color = "#263a29";
+    titleEl.style = "margin-bottom: 12px; font-size: 22px; color: #263a29;";
   
-    // Modal message
     const messageEl = document.createElement("p");
     messageEl.id = "modal-message";
-    messageEl.style.marginBottom = "24px";
-    messageEl.style.color = "#333";
-    messageEl.style.fontSize = "16px";
+    messageEl.style = "margin-bottom: 24px; color: #333; font-size: 16px;";
   
     const closeBtn = document.createElement("button");
-    closeBtn.id = "modal-close";
     closeBtn.textContent = "Ok";
-    closeBtn.style.padding = "10px 20px";
-    closeBtn.style.border = "none";
-    closeBtn.style.backgroundColor = "#263a29";
-    closeBtn.style.color = "white";
-    closeBtn.style.borderRadius = "8px";
-    closeBtn.style.cursor = "pointer";
-    closeBtn.style.fontWeight = "bold";
-    closeBtn.style.fontSize = "16px";
-  
-    closeBtn.addEventListener("click", () => {
+    closeBtn.style = `
+      padding: 10px 20px;
+      border: none;
+      background-color: #263a29;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    `;
+    closeBtn.onclick = () => {
       modal.style.display = "none";
       if (resetAfterClose) {
         registerForm.reset();
         resetAfterClose = false;
       }
-    });
+    };
   
-    modal.appendChild(titleEl);
-    modal.appendChild(messageEl);
-    modal.appendChild(closeBtn);
+    modal.append(titleEl, messageEl, closeBtn);
     document.body.appendChild(modal);
   
+    function showModal(title, message, isError = false) {
+      titleEl.textContent = title;
+      titleEl.style.color = isError ? "#D8000C" : "#263a29";
+      messageEl.textContent = message;
+      modal.style.display = "block";
+    }
+  
+    // === Register Plant Form ===
     registerForm.addEventListener("submit", async function (event) {
       event.preventDefault();
-  
       const plantId = document.getElementById("plantId").value.trim();
       const plantType = document.getElementById("plantType").value.trim().toLowerCase();
       const plantName = document.getElementById("plantName").value.trim();
@@ -73,26 +77,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const checkRes = await fetch("/check-plant", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ device_id: plantId, plantType })
+          body: JSON.stringify({ device_id: plantId })
         });
   
         const checkData = await checkRes.json();
   
         if (checkRes.ok && checkData.exists) {
-          titleEl.textContent = "Error";
-          titleEl.style.color = "#D8000C"; // red
-          messageEl.textContent = `A plant with ID '${plantId}' and type '${plantType}' already exists.`;
-          modal.style.display = "block";
+          showModal("Error", `A plant with ID '${plantId}' already exists.`, true);
           return;
         }
   
-        const payload = {
-          device_id: plantId,
-          plantType,
-          plantName,
-          birthday: plantBirthday
-        };
-  
+        const payload = { device_id: plantId, plantType, plantName, birthday: plantBirthday };
         const updateRes = await fetch("/update", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -102,23 +97,46 @@ document.addEventListener("DOMContentLoaded", function () {
         const updateData = await updateRes.json();
   
         if (updateRes.ok) {
-          titleEl.textContent = "Plant Registration Successful!";
-          titleEl.style.color = "#263a29";
-          messageEl.textContent = `Plant '${plantName}' is now registered! Remember to pair your sensor box to WiFi to start scoring points.`;
+          showModal("Plant Registration Successful!", `Plant '${plantName}' is now registered! Remember to pair your sensor box to WiFi to start scoring points.`);
           resetAfterClose = true;
-          modal.style.display = "block";
         } else {
-          titleEl.textContent = "Error";
-          titleEl.style.color = "#D8000C";
-          messageEl.textContent = `Error registering plant: ${updateData.message || "Unknown error"}`;
-          modal.style.display = "block";
+          showModal("Error", updateData.message || "Unknown error", true);
         }
       } catch (error) {
-        titleEl.textContent = "Error";
-        titleEl.style.color = "#D8000C";
-        messageEl.textContent = `Unexpected error: ${error.message}`;
-        modal.style.display = "block";
-        console.error("Unexpected error during registration:", error);
+        showModal("Error", error.message, true);
+      }
+    });
+  
+    // === Check Plant Form ===
+    checkForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const checkId = document.getElementById("checkId").value.trim();
+  
+      // Clear previous values
+      moistureDisplay.textContent = "N/A";
+      humidityDisplay.textContent = "N/A";
+      tempDisplay.textContent = "N/A";
+  
+      try {
+        const res = await fetch("/fetch-plant-data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ device_id: checkId })
+        });
+  
+        if (!res.ok) {
+          throw new Error("Plant ID not found.");
+        }
+  
+        const data = await res.json();
+  
+        tempDisplay.textContent = typeof data.temperature === "number" ? `${data.temperature} °C` : "N/A";
+        humidityDisplay.textContent = typeof data.humidity === "number" ? `${data.humidity}% / 100%` : "N/A";
+        moistureDisplay.textContent = typeof data.moisture === "number"
+          ? `${Math.round((data.moisture / 1015) * 100)}% / 100%`
+          : "N/A";
+      } catch (err) {
+        showModal("Error", err.message, true);
       }
     });
   });

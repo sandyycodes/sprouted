@@ -437,14 +437,37 @@ label {
   color: #263a29;
 }
 
-input[type="text"],
-input[type="date"],
-select {
+form input[type="text"],
+form input[type="date"],
+form select,
+form button {
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 12px;
   font-size: 16px;
 }
+
+
+.register-form {
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.register-form input[type="text"],
+.register-form input[type="date"],
+.register-form select {
+  width: 100%;
+}
+
+.register-form .wide-btn {
+  width: 72%;
+  align-self: center;
+}
+
 
 /* .card-grid {
   display: grid;
@@ -724,6 +747,11 @@ select {
   .garden-card-wrapper:last-child {
     margin-bottom: 0;
   }
+  
+  .register-form {
+    max-width: 100%;
+  }
+  
 
   .check-plant-container {
     flex-direction: column;
@@ -741,6 +769,10 @@ select {
   .plant-data-box {
     width: 100%;
   }
+
+  .check-form input[type="text"] {
+  width: 100%;
+}
 
 }
 
