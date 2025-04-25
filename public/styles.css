@@ -20,6 +20,7 @@ body {
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   column-gap: var(--grid-gutter);
   margin: 0 var(--grid-margin);
+  outline: 1px dashed rgba(0,0,0,0.1);
 }
 
 .grid-col-span-12 { grid-column: span 12; }
@@ -39,20 +40,39 @@ body {
   box-sizing: border-box;
 }
 
+/* ✅ Remove flex, use grid layout (matches page content) */
 .navbar .grid-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  margin: 0 var(--grid-margin);
   align-items: center;
   padding: 20px 0;
-  flex-wrap: wrap;
 }
 
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  /* 👇 Make sure it aligns left with grid */
+  justify-content: flex-start;
+}
+
+.navbar-logo a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* 👇 Reset any unwanted spacing */
+  padding: 0;
+  margin: 0;
+}
 
 .navbar-logo-img {
   height: 40px;
   width: auto;
-  vertical-align: middle;
+  display: block; /* ✅ Removes extra whitespace from inline elements */
 }
+
+
 
 .navbar-links {
   display: flex;
@@ -409,7 +429,7 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 label {
@@ -420,22 +440,24 @@ label {
 input[type="text"],
 input[type="date"],
 select {
+  width: 480px;
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 12px;
   font-size: 16px;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.garden-card-grid {
+  display: flex;
   gap: 32px;
   margin-bottom: 64px;
-  width: 100%;
+  flex-wrap: wrap;
 }
 
-.card-item {
-  grid-column: span 1;
+/* Each card wrapper */
+.garden-card-wrapper {
+  flex: 1;
+  min-width: 320px; /* Optional: avoid squishing too small */
 }
 
 
@@ -449,6 +471,31 @@ select {
   .grid-container {
     margin: 0 var(--grid-margin);
   }
+
+  .navbar .grid-container {
+    grid-template-columns: repeat(4, 1fr); /* Fewer columns on mobile */
+    padding: 12px var(--grid-margin);
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    grid-column: span 2;
+  }
+  
+  .navbar-toggle {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 28px;
+    height: auto;
+    padding: 0;
+  }
+  
+  .navbar-logo-img {
+    height: 32px; /* smaller logo */
+  }
+  
 
   .leaderboard-entry {
     grid-template-columns: 40px 1fr auto;
@@ -468,10 +515,6 @@ select {
     font-size: 14px;
   }
 
-  .navbar-toggle {
-    display: block;
-    text-align: right;
-  }
 
   .navbar-links {
     display: none;
@@ -511,12 +554,28 @@ select {
     font-size: 36px;
   }
 
-  .garden-card {
-    margin-bottom: 32px;
+  /* .garden-card-grid {
+    flex-direction: column;
+    gap: 24px;
   }
 
   .garden-card-wrapper {
-    grid-column: span 12 !important;
+    width: 100%;
+  } */
+
+  .garden-card-grid {
+    flex-direction: column;
+    
+  }
+
+  .garden-card-wrapper {
+    width: 100%;
+    margin-bottom: 24px; /* ← This creates vertical space between stacked cards */
+  }
+
+  /* Optional: remove margin on the last card */
+  .garden-card-wrapper:last-child {
+    margin-bottom: 0;
   }
 
 }

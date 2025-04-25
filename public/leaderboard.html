@@ -10,24 +10,27 @@
 
 <body>
   <!-- Navigation Bar -->
-  <div class="navbar">
-    <div class="grid-container">
-      <div class="grid-col-span-6 navbar-logo">
-        <a href="index.html">
-          <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
-        </a>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <div class="navbar-inner">
+          <div class="grid-container">
+              <div class="grid-col-span-6 navbar-logo">
+                  <a href="index.html">
+                      <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
+                  </a>
+              </div>
+              <div class="grid-col-span-6 navbar-links" id="navbar-links">
+                  <a href="index.html" class="nav-link">ABOUT</a>
+                  <a href="leaderboard.html" class="nav-link active">LEADERBOARD</a>
+                  <a href="myGarden.html" class="nav-link">MY GARDEN</a>
+              </div>
+              <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
+          </div>
       </div>
-  
-      <div class="grid-col-span-6 navbar-links" id="navbar-links">
-        <a href="index.html" class="nav-link" id="about-link">ABOUT</a>
-        <a href="leaderboard.html" class="nav-link active" id="leaderboard-link">LEADERBOARD</a>
-        <a href="myGarden.html" class="nav-link" id="garden-link">MY GARDEN</a>
-      </div>
-  
-      <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
-    </div>
   </div>
-  
+
+
+  <!-- Main Leaderboard Content -->
   <section class="leaderboard-wrapper tomato-bg">
     <main class="leaderboard-page">
       <header class="page-header">
@@ -47,35 +50,29 @@
         <section class="grid-col-span-12">
           <div id="leaderboard-wrapper" class="leaderboard-wrapper tomato-theme">
             <div class="leaderboard-controls">
-
               <div class="view-toggle-pill">
                 <button id="top5-btn" class="pill-button active">Top 5</button>
                 <button id="all-btn" class="pill-button">All</button>
               </div>
-              
               <div class="last-updated" id="last-updated">Last Updated: --</div>
-              
-
             </div>
             <div id="leaderboard-body" class="leaderboard-entries">
               <!-- Populated by JS -->
             </div>
           </div>
         </section>
-
       </div>
     </main>
+  </section>
 
-
-
-    <script src="leaderboard.js"></script>
-    <script>
-      const toggleBtn = document.getElementById('navbar-toggle');
-      const navLinks = document.getElementById('navbar-links');
-      toggleBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
-      });
-    </script>
+  <script src="leaderboard.js"></script>
+  <script>
+    const toggleBtn = document.getElementById('navbar-toggle');
+    const navLinks = document.getElementById('navbar-links');
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
 </body>
 
 </html>

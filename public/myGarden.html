@@ -2,110 +2,111 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Garden</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Garden</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <!-- Navigation Bar -->
-  <div class="navbar">
-    <div class="grid-container">
-      <div class="grid-col-span-6 navbar-logo">
-        <a href="index.html">
-          <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
-        </a>
-      </div>
-      <div class="grid-col-span-6 navbar-links" id="navbar-links">
-        <a href="index.html" class="nav-link">ABOUT</a>
-        <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
-        <a href="myGarden.html" class="nav-link active">MY GARDEN</a>
-      </div>
-      <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="grid-container">
+                <div class="grid-col-span-6 navbar-logo">
+                    <a href="index.html">
+                        <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
+                    </a>
+                </div>
+                <div class="grid-col-span-6 navbar-links" id="navbar-links">
+                    <a href="index.html" class="nav-link">ABOUT</a>
+                    <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
+                    <a href="myGarden.html" class="nav-link active">MY GARDEN</a>
+                </div>
+                <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Main Garden Page -->
-  <main class="grid-container garden-page">
-    <section class="grid-col-span-12">
-      <h1>MY GARDEN</h1>
-      <p class="subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get started!</p>
-    </section>
-
-    <!-- Two Feature Cards -->
-<!-- Two Feature Cards Inside Grid -->
-<!-- Two Feature Cards Inside Grid -->
-<section class="grid-col-span-6 garden-card-wrapper">
-    <div class="garden-card">
-      <img src="images/register-plant.png" alt="Register a Plant" class="card-image">
-      <a href="#register" class="wide-btn">Register a New Plant</a>
-    </div>
-  </section>
-  
-  <section class="grid-col-span-6 garden-card-wrapper">
-    <div class="garden-card">
-      <img src="images/check-plant.png" alt="Check a Plant" class="card-image">
-      <a href="#check" class="wide-btn">Check on a Plant</a>
-    </div>
-  </section>
-  
-
+    <!-- Main Garden Page -->
+    <main class="garden-page">
+        <div class="grid-container">
+          <section class="grid-col-span-12">
+            <h1>MY GARDEN</h1>
+            <p class="subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get started!</p>
+          </section>
+      
+          <!-- Cards Row -->
+          <section class="grid-col-span-12 garden-card-grid">
+            <div class="garden-card-wrapper">
+              <div class="garden-card">
+                <img src="images/register-plant.png" alt="Register a Plant" class="card-image">
+                <a href="#register" class="wide-btn">Register a New Plant</a>
+              </div>
+            </div>
+      
+            <div class="garden-card-wrapper">
+              <div class="garden-card">
+                <img src="images/check-plant.png" alt="Check a Plant" class="card-image">
+                <a href="#check" class="wide-btn">Check on a Plant</a>
+              </div>
+            </div>
+          </section>
+      
+          <!-- Register Section -->
+          <section class="grid-col-span-12 form-section" id="register">
+            <img src="images/register-banner.png" alt="Register Banner" class="form-image">
+            <h2>Register a New Plant</h2>
+            <p>Input your plant details to get started with SproutEd's monitoring system.</p>
+            <form id="registerForm">
+              <!-- inputs -->
+              <label for="plantId">Plant ID: <span title="Your device’s unique plant ID">❓</span></label>
+              <input type="text" id="plantId" name="plantId" required>
+      
+              <label for="plantType">Plant Type:</label>
+              <select id="plantType" name="plantType" required>
+                <option value="">-- Select a Plant --</option>
+                <option value="tomato">Tomato</option>
+                <option value="basil">Basil</option>
+                <option value="spinach">Spinach</option>
+              </select>
+      
+              <label for="plantName">Plant Name:</label>
+              <input type="text" id="plantName" name="plantName" required>
+      
+              <label for="plantBirthday">Plant Birthday: <span title="Date your plant was planted">❓</span></label>
+              <input type="date" id="plantBirthday" name="plantBirthday" required>
+      
+              <button type="submit" class="wide-btn">Submit</button>
+            </form>
+          </section>
+      
+          <!-- Check Section -->
+          <section class="grid-col-span-12 form-section" id="check">
+            <img src="images/check-banner.png" alt="Check Banner" class="form-image">
+            <h2>Check on a Plant</h2>
+            <p>Enter the Plant ID to check the latest updates and status.</p>
+            <form id="checkForm">
+              <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
+              <input type="text" id="checkId" name="checkId" required>
+      
+              <button type="submit" class="wide-btn">Submit</button>
+            </form>
+          </section>
+        </div>
+      </main>
       
 
-  
-      
-      
 
-    <!-- Register a Plant Section -->
-    <section class="grid-col-span-12 form-section" id="register">
-      <img src="images/register-banner.png" alt="Register Banner" class="form-image">
-      <h2>Register a New Plant</h2>
-      <p>Input your plant details to get started with SproutEd's monitoring system.</p>
-      <form id="registerForm">
-        <label for="plantId">Plant ID: <span title="Your device’s unique plant ID">❓</span></label>
-        <input type="text" id="plantId" name="plantId" required>
+    <script src="myGarden.js"></script>
+    <script>
+        const toggleBtn = document.getElementById('navbar-toggle');
+        const navLinks = document.getElementById('navbar-links');
 
-        <label for="plantType">Plant Type:</label>
-        <select id="plantType" name="plantType" required>
-          <option value="">-- Select a Plant --</option>
-          <option value="tomato">Tomato</option>
-          <option value="basil">Basil</option>
-          <option value="spinach">Spinach</option>
-        </select>
-
-        <label for="plantName">Plant Name:</label>
-        <input type="text" id="plantName" name="plantName" required>
-
-        <label for="plantBirthday">Plant Birthday: <span title="Date your plant was planted">❓</span></label>
-        <input type="date" id="plantBirthday" name="plantBirthday" required>
-
-        <button type="submit" class="wide-btn">Submit</button>
-      </form>
-    </section>
-
-    <!-- Check a Plant Section -->
-    <section class="grid-col-span-12 form-section" id="check">
-      <img src="images/check-banner.png" alt="Check Banner" class="form-image">
-      <h2>Check on a Plant</h2>
-      <p>Enter the Plant ID to check the latest updates and status.</p>
-      <form id="checkForm">
-        <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
-        <input type="text" id="checkId" name="checkId" required>
-
-        <button type="submit" class="wide-btn">Submit</button>
-      </form>
-    </section>
-  </main>
-
-  <script src="myGarden.js"></script>
-  <script>
-    const toggleBtn = document.getElementById('navbar-toggle');
-    const navLinks = document.getElementById('navbar-links');
-
-    toggleBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-  </script>
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
 </body>
+
 </html>
