@@ -31,71 +31,82 @@
     <!-- Main Garden Page -->
     <main class="garden-page">
         <div class="grid-container">
-          <section class="grid-col-span-12">
-            <h1>MY GARDEN</h1>
-            <p class="subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get started!</p>
-          </section>
-      
-          <!-- Cards Row -->
-          <section class="grid-col-span-12 garden-card-grid">
-            <div class="garden-card-wrapper">
-              <div class="garden-card">
-                <img src="images/register-plant.png" alt="Register a Plant" class="card-image">
-                <a href="#register" class="wide-btn">Register a New Plant</a>
-              </div>
-            </div>
-      
-            <div class="garden-card-wrapper">
-              <div class="garden-card">
-                <img src="images/check-plant.png" alt="Check a Plant" class="card-image">
-                <a href="#check" class="wide-btn">Check on a Plant</a>
-              </div>
-            </div>
-          </section>
-      
-          <!-- Register Section -->
-          <section class="grid-col-span-12 form-section" id="register">
-            <img src="images/register-banner.png" alt="Register Banner" class="form-image">
-            <h2>Register a New Plant</h2>
-            <p>Input your plant details to get started with SproutEd's monitoring system.</p>
-            <form id="registerForm">
-              <!-- inputs -->
-              <label for="plantId">Plant ID: <span title="Your device’s unique plant ID">❓</span></label>
-              <input type="text" id="plantId" name="plantId" required>
-      
-              <label for="plantType">Plant Type:</label>
-              <select id="plantType" name="plantType" required>
-                <option value="">-- Select a Plant --</option>
-                <option value="tomato">Tomato</option>
-                <option value="basil">Basil</option>
-                <option value="spinach">Spinach</option>
-              </select>
-      
-              <label for="plantName">Plant Name:</label>
-              <input type="text" id="plantName" name="plantName" required>
-      
-              <label for="plantBirthday">Plant Birthday: <span title="Date your plant was planted">❓</span></label>
-              <input type="date" id="plantBirthday" name="plantBirthday" required>
-      
-              <button type="submit" class="wide-btn">Submit</button>
-            </form>
-          </section>
-      
-          <!-- Check Section -->
-          <section class="grid-col-span-12 form-section" id="check">
-            <img src="images/check-banner.png" alt="Check Banner" class="form-image">
-            <h2>Check on a Plant</h2>
-            <p>Enter the Plant ID to check the latest updates and status.</p>
-            <form id="checkForm">
-              <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
-              <input type="text" id="checkId" name="checkId" required>
-      
-              <button type="submit" class="wide-btn">Submit</button>
-            </form>
-          </section>
+            <section class="grid-col-span-12">
+                <h1>MY GARDEN</h1>
+                <p class="subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get
+                    started!</p>
+            </section>
+
+            <!-- Cards Row -->
+            <section class="grid-col-span-12 garden-card-grid">
+                <div class="garden-card-wrapper">
+                    <div class="garden-card">
+                        <img src="images/register-plant.png" alt="Register a Plant" class="card-image">
+                        <a href="#register" class="wide-btn">Register a New Plant</a>
+                    </div>
+                </div>
+
+                <div class="garden-card-wrapper">
+                    <div class="garden-card">
+                        <img src="images/check-plant.png" alt="Check a Plant" class="card-image">
+                        <a href="#check" class="wide-btn">Check on a Plant</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Register Section -->
+            <section class="grid-col-span-12 form-section" id="register">
+                <img src="images/register-banner.png" alt="Register Banner" class="form-image">
+                <h2>Register a New Plant</h2>
+                <p>Input your plant details to get started with SproutEd's monitoring system.</p>
+                <form id="registerForm">
+                    <!-- inputs -->
+                    <label for="plantId">Plant ID: <span title="Your device’s unique plant ID">❓</span></label>
+                    <input type="text" id="plantId" name="plantId" required>
+
+                    <label for="plantType">Plant Type:</label>
+                    <select id="plantType" name="plantType" required>
+                        <option value="">-- Select a Plant --</option>
+                        <option value="tomato">Tomato</option>
+                        <option value="basil">Basil</option>
+                        <option value="spinach">Spinach</option>
+                    </select>
+
+                    <label for="plantName">Plant Name:</label>
+                    <input type="text" id="plantName" name="plantName" required>
+
+                    <label for="plantBirthday">Plant Birthday: <span
+                            title="Date your plant was planted">❓</span></label>
+                    <input type="date" id="plantBirthday" name="plantBirthday" required>
+
+                    <button type="submit" class="wide-btn">Submit</button>
+                </form>
+            </section>
+
+            <!-- Check Section -->
+            <section class="grid-col-span-12 form-section" id="check">
+                <img src="images/check-banner.png" alt="Check Banner" class="form-image">
+                <h2>Check on a Plant</h2>
+                <p>Enter the Plant ID to check the latest updates and status.</p>
+                <form id="checkForm">
+                    <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
+                    <input type="text" id="checkId" name="checkId" required>
+
+                    <button type="submit" class="wide-btn">Submit</button>
+                </form>
+            </section>
         </div>
-      </main>
-      
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal hidden">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <button id="modal-close" class="modal-btn">OK</button>
+        </div>
+    </div>
+
+
 
 
     <script src="myGarden.js"></script>

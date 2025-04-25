@@ -12,9 +12,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to Mongo Atlas with Mongoose 
+// Connect to Mongo Atlas with Mongoose
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log(`Connected to MongoDB Atlas, using database: ${mongoose.connection.db.databaseName}`))
     .catch(err => console.error('MongoDB connection error:', err));
@@ -23,7 +23,8 @@ mongoose.connect(process.env.MONGO_URI)
 const leaderboardSchema = new mongoose.Schema({
     device_id: { type: String, required: true, unique: true },
     plantName: { type: String },
-    plantType: { type: String }, 
+    plantType: { type: String },
+    birthday: { type: Date },
     temperature: { type: Number },
     humidity: { type: Number },
     moisture: { type: Number },
@@ -31,44 +32,48 @@ const leaderboardSchema = new mongoose.Schema({
     lastUpdated: { type: Date, default: Date.now }
 }, { collection: 'leaderboard' });
 
-
 const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
-  
 
-// Endpoint to receive data from ESP32
+// Endpoint to receive data from ESP32 or form
 app.post('/update', async (req, res) => {
-    const { device_id, plantName, plantType, temperature, humidity, moisture } = req.body;
+    const { device_id, plantName, plantType, birthday, temperature, humidity, moisture } = req.body;
 
     if (!device_id) {
         return res.status(400).send("Missing device ID");
     }
 
-    // ✅ Log plantType and its type to check if it exists and is a string
-    console.log("Plant Type:", plantType, typeof plantType);
-
     console.log("Received sensor data:", req.body);
 
-    const score = (100 - Math.abs(temperature - 25)) + (humidity / 2) + (moisture / 10);
+    // Only calculate score if all sensor values are present
+    let score = null;
+    if (
+        typeof temperature === 'number' &&
+        typeof humidity === 'number' &&
+        typeof moisture === 'number'
+    ) {
+        score = (100 - Math.abs(temperature - 25)) + (humidity / 2) + (moisture / 10);
+    }
+
+    const updateFields = {
+        device_id,
+        plantName,
+        plantType,
+        birthday: birthday ? new Date(birthday) : null,
+        lastUpdated: new Date()
+    };
+
+    if (typeof temperature === 'number') updateFields.temperature = temperature;
+    if (typeof humidity === 'number') updateFields.humidity = humidity;
+    if (typeof moisture === 'number') updateFields.moisture = moisture;
+    if (typeof score === 'number') updateFields.score = score;
 
     try {
         const result = await Leaderboard.updateOne(
             { device_id },
-            {
-                $set: {
-                    device_id,
-                    plantName,
-                    plantType, // This will only update if it's defined!
-                    temperature,
-                    humidity,
-                    moisture,
-                    score,
-                    lastUpdated: new Date()
-                }
-            },
+            { $set: updateFields },
             { upsert: true }
         );
 
-        //console.log(`Updated ${plantName} score: ${score}`);
         res.status(200).json({ message: "Data received & score updated", score });
     } catch (error) {
         console.error("Error updating leaderboard:", error);
@@ -76,13 +81,12 @@ app.post('/update', async (req, res) => {
     }
 });
 
-
 // Endpoint to fetch leaderboard
 app.get('/leaderboard', async (req, res) => {
     const { plantType } = req.query;
 
     try {
-        const filter = plantType ? { plantType } : {}; // If provided, filter by type
+        const filter = plantType ? { plantType } : {};
         const leaderboard = await Leaderboard.find(filter).sort({ score: -1 });
 
         if (!leaderboard.length) {
@@ -95,7 +99,6 @@ app.get('/leaderboard', async (req, res) => {
         res.status(500).send("Internal server error");
     }
 });
-
 
 // Start Server
 app.listen(PORT, () => {
