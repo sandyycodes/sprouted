@@ -31,29 +31,29 @@ const leaderboardSchema = new mongoose.Schema({
 
 const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
 
-// === Updated check endpoint (only checks device_id) ===
+// Check if device_id exists
 app.post('/check-plant', async (req, res) => {
-    const { device_id } = req.body;
+  const { device_id } = req.body;
 
-    if (!device_id) {
-        return res.status(400).json({ message: "Missing device_id" });
-    }
+  if (!device_id) {
+    return res.status(400).json({ message: "Missing device_id" });
+  }
 
-    try {
-        const exists = await Leaderboard.findOne({ device_id: device_id.toLowerCase() });
-        if (exists) {
-            return res.status(200).json({ exists: true, data: exists });
-        } else {
-            return res.status(404).json({ exists: false, message: "No matching device found" });
-        }
-    } catch (err) {
-        console.error("Error checking plant existence:", err);
-        res.status(500).json({ message: "Server error" });
+  try {
+    const exists = await Leaderboard.findOne({ device_id: new RegExp(`^${device_id}$`, 'i') });
+
+    if (exists) {
+      return res.status(200).json({ exists: true, data: exists });
+    } else {
+      return res.status(404).json({ exists: false, message: "No matching device found" });
     }
+  } catch (err) {
+    console.error("Error checking plant existence:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
-
-// === New: Endpoint to fetch plant sensor data by ID ===
+// Fetch plant data
 app.post('/fetch-plant-data', async (req, res) => {
   const { device_id } = req.body;
 
@@ -62,13 +62,14 @@ app.post('/fetch-plant-data', async (req, res) => {
   }
 
   try {
-    const plant = await Leaderboard.findOne({ device_id });
+    const plant = await Leaderboard.findOne({ device_id: new RegExp(`^${device_id}$`, 'i') });
 
     if (!plant) {
       return res.status(404).json({ message: "Plant not found" });
     }
 
     res.status(200).json({
+      plantName: plant.plantName || "",
       moisture: plant.moisture,
       humidity: plant.humidity,
       temperature: plant.temperature
@@ -79,7 +80,7 @@ app.post('/fetch-plant-data', async (req, res) => {
   }
 });
 
-// === Existing: Endpoint to handle registration/update ===
+// Update plant info
 app.post('/update', async (req, res) => {
   const { device_id, plantName, plantType, birthday, temperature, humidity, moisture } = req.body;
   const safeBirthday = birthday ? new Date(birthday) : null;
@@ -118,7 +119,7 @@ app.post('/update', async (req, res) => {
   }
 });
 
-// === Leaderboard fetch endpoint ===
+// Leaderboard data
 app.get('/leaderboard', async (req, res) => {
   try {
     const leaderboard = await Leaderboard.find().sort({ score: -1 });
