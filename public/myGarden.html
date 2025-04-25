@@ -84,17 +84,41 @@
             </section>
 
             <!-- Check Section -->
-            <section class="grid-col-span-12 form-section" id="check">
-                <img src="images/check-banner.png" alt="Check Banner" class="form-image">
-                <h2>Check on a Plant</h2>
-                <p>Enter the Plant ID to check the latest updates and status.</p>
-                <form id="checkForm">
-                    <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
-                    <input type="text" id="checkId" name="checkId" required>
+<section class="grid-col-span-12 form-section" id="check">
+    <img src="images/check-banner.png" alt="Check Banner" class="form-image">
+    <h2>Check on a Plant</h2>
+    <p>Enter the Plant ID to check the latest updates and status.</p>
+  
+    <div class="check-plant-container">
+      <!-- Left: Form -->
+      <form id="checkForm" class="check-form">
+        <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
+        <input type="text" id="checkId" name="checkId" required>
+        <button type="submit" class="wide-btn">Submit</button>
+      </form>
+  
+      <!-- Right: Plant Data -->
+      <div class="plant-data-panel">
+        <h3>Plant Data</h3>
+        <div class="plant-data-grid">
+          <div class="plant-data-box">
+            <h4>Moisture:</h4>
+            <p id="moistureData">N/A</p>
+          </div>
+          <div class="plant-data-box">
+            <h4>Humidity:</h4>
+            <p id="humidityData">N/A</p>
+          </div>
+          <div class="plant-data-box">
+            <h4>Temperature:</h4>
+            <p id="tempData">N/A</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
-                    <button type="submit" class="wide-btn">Submit</button>
-                </form>
-            </section>
         </div>
     </main>
 

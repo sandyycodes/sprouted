@@ -512,6 +512,100 @@ select {
   background-color: #96A956;
 }
 
+.check-plant-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 96px;
+  flex-wrap: nowrap; /* This ensures side-by-side on desktop */
+  margin-top: 32px;
+}
+
+.check-form {
+  flex: 1;
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.check-form input[type="text"] {
+  width: 100%;
+}
+
+.check-form .wide-btn {
+  width: 72%;
+  align-self: center;
+}
+
+.plant-data-panel {
+  flex: 1;
+  max-width: 48%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.plant-data-panel h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #263a29;
+  text-align: center;
+}
+
+.plant-data-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.plant-data-box {
+  flex: 1;
+  background-color: white;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+}
+
+.plant-data-box h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #263a29;
+  margin-bottom: 6px;
+}
+
+.plant-data-box p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Mobile view stacks vertically */
+@media (max-width: 768px) {
+  .check-plant-container {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .check-form,
+  .plant-data-panel {
+    max-width: 100%;
+  }
+
+  .plant-data-grid {
+    flex-direction: column;
+  }
+
+  .plant-data-box {
+    width: 100%;
+  }
+}
+
+
 
 
 @media (max-width: 768px) {
@@ -629,6 +723,23 @@ select {
   /* Optional: remove margin on the last card */
   .garden-card-wrapper:last-child {
     margin-bottom: 0;
+  }
+
+  .check-plant-container {
+    flex-direction: column;
+  }
+
+  .check-form,
+  .plant-data-panel {
+    flex: 1 1 100%;
+  }
+
+  .plant-data-grid {
+    flex-direction: column;
+  }
+
+  .plant-data-box {
+    width: 100%;
   }
 
 }
