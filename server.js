@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -14,12 +13,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to Mongo Atlas with Mongoose
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log(`Connected to MongoDB Atlas, using database: ${mongoose.connection.db.databaseName}`))
+    .then(() => console.log(`Connected to MongoDB Atlas`))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// Define Mongoose Schema & Model
 const leaderboardSchema = new mongoose.Schema({
     device_id: { type: String, required: true, unique: true },
     plantName: { type: String },
@@ -34,38 +31,54 @@ const leaderboardSchema = new mongoose.Schema({
 
 const Leaderboard = mongoose.model('Leaderboard', leaderboardSchema);
 
-// Endpoint to receive data from ESP32 or form
+// === New check endpoint ===
+app.post('/check-plant', async (req, res) => {
+    console.log("Incoming check-plant request:", req.body);
+    const { device_id, plantType } = req.body;
+
+    if (!device_id || !plantType) {
+        return res.status(400).json({ message: "Missing device_id or plantType" });
+    }
+
+    try {
+        const exists = await Leaderboard.findOne({ device_id, plantType });
+        if (exists) {
+            return res.status(200).json({ exists: true });
+        } else {
+            return res.status(200).json({ exists: false });
+        }
+    } catch (err) {
+        console.error("Error checking plant existence:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+// === Existing update endpoint ===
 app.post('/update', async (req, res) => {
     const { device_id, plantName, plantType, birthday, temperature, humidity, moisture } = req.body;
+    const safeBirthday = birthday ? new Date(birthday) : null;
 
     if (!device_id) {
-        return res.status(400).send("Missing device ID");
+        return res.status(400).json({ message: "Missing Device Id" });
+
     }
 
-    console.log("Received sensor data:", req.body);
-
-    // Only calculate score if all sensor values are present
-    let score = null;
-    if (
-        typeof temperature === 'number' &&
-        typeof humidity === 'number' &&
-        typeof moisture === 'number'
-    ) {
-        score = (100 - Math.abs(temperature - 25)) + (humidity / 2) + (moisture / 10);
-    }
+    const score =
+        temperature && humidity && moisture
+            ? (100 - Math.abs(temperature - 25)) + (humidity / 2) + (moisture / 10)
+            : null;
 
     const updateFields = {
         device_id,
         plantName,
         plantType,
-        birthday: birthday ? new Date(birthday) : null,
+        birthday: safeBirthday,
+        temperature,
+        humidity,
+        moisture,
+        score,
         lastUpdated: new Date()
     };
-
-    if (typeof temperature === 'number') updateFields.temperature = temperature;
-    if (typeof humidity === 'number') updateFields.humidity = humidity;
-    if (typeof moisture === 'number') updateFields.moisture = moisture;
-    if (typeof score === 'number') updateFields.score = score;
 
     try {
         const result = await Leaderboard.updateOne(
@@ -73,34 +86,26 @@ app.post('/update', async (req, res) => {
             { $set: updateFields },
             { upsert: true }
         );
-
         res.status(200).json({ message: "Data received & score updated", score });
     } catch (error) {
         console.error("Error updating leaderboard:", error);
-        res.status(500).send("Database update error");
+        res.status(500).json({ message: "Database update error" });
+
     }
 });
 
-// Endpoint to fetch leaderboard
+// === Leaderboard Data Endpoint ===
 app.get('/leaderboard', async (req, res) => {
-    const { plantType } = req.query;
-
     try {
-        const filter = plantType ? { plantType } : {};
-        const leaderboard = await Leaderboard.find(filter).sort({ score: -1 });
-
-        if (!leaderboard.length) {
-            return res.status(404).json({ message: "No leaderboard data found" });
-        }
-
-        res.json(leaderboard);
-    } catch (error) {
-        console.error("Error retrieving leaderboard:", error);
-        res.status(500).send("Internal server error");
+      const leaderboard = await Leaderboard.find().sort({ score: -1 });
+      res.status(200).json(leaderboard);
+    } catch (err) {
+      console.error("Error fetching leaderboard data:", err);
+      res.status(500).json({ message: "Failed to fetch leaderboard data." });
     }
-});
+  });
+  
 
-// Start Server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
