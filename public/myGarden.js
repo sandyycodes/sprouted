@@ -104,9 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       tempDisplay.textContent = typeof data.temperature === "number" ? `${data.temperature} °C` : "N/A";
-      humidityDisplay.textContent = typeof data.humidity === "number" ? `${data.humidity}% / 100%` : "N/A";
+      humidityDisplay.textContent = typeof data.humidity === "number" ? `${data.humidity}%` : "N/A";
       moistureDisplay.textContent = typeof data.moisture === "number"
-        ? `${Math.round((data.moisture / 1015) * 100)}% / 100%`
+        ? `${Math.round((data.moisture / 1015) * 100)}%`
         : "N/A";
     } catch (error) {
       showModal("Error", error.message, true);
