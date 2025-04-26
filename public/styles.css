@@ -12,17 +12,42 @@ body {
 :root {
   --grid-columns: 12;
   --grid-gutter: 32px;
-  --grid-margin: 72px;
+  --grid-padding: 32px;
+  --grid-max-width: 1280px; /* Set your hard limit for desktop layout */
 }
 
+/* Universal Grid Container */
 .grid-container {
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--grid-padding);
+  padding-right: var(--grid-padding);
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   column-gap: var(--grid-gutter);
-  margin: 0 var(--grid-margin);
-  outline: 1px dashed rgba(0,0,0,0.1);
 }
 
+/* Navbar-specific grid */
+.navbar .grid-container {
+  width: 100%;
+  max-width: var(--grid-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--grid-padding);
+  padding-right: var(--grid-padding);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Grid column spans */
 .grid-col-span-12 { grid-column: span 12; }
 .grid-col-span-6 { grid-column: span 6; }
 .grid-col-span-4 { grid-column: span 4; }
@@ -30,24 +55,7 @@ body {
 .grid-col-span-2 { grid-column: span 2; }
 .grid-col-span-1 { grid-column: span 1; }
 
-.navbar {
-  width: 100%;
-  background-color: #f5f1e5;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  box-sizing: border-box;
-}
 
-.navbar .grid-container {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  column-gap: var(--grid-gutter);
-  margin: 0 var(--grid-margin);
-  align-items: center;
-  padding: 20px 0;
-}
 
 .navbar-logo {
   display: flex;
@@ -602,13 +610,20 @@ form button {
 /* HERO SECTION */
 .hero-section {
   width: 100%;
-  margin-top: 96px; /* Offset for fixed navbar */
   padding: 80px 0;
   box-sizing: border-box;
 }
 
 .hero-section .grid-container {
   align-items: center;
+  width: 100%; 
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--grid-margin); 
+  padding-right: var(--grid-margin); 
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
 }
 
 .hero-text {
@@ -671,60 +686,48 @@ form button {
 /*About - What is Sprouted?*/
 
 .info-section {
-  margin: 120px 0; /* Top and bottom margin to create breathing room */
+  margin: 120px 0;
+  text-align: left;
 }
 
 .info-section .grid-container {
-  align-items: center; /* Vertically center text and image */
+  align-items: center;
+  
 }
 
-.info-text {
-  text-align: left;
+.how-it-works .steps {
+  margin-top: 32px;
 }
 
-.info-text h2 {
-  font-size: 40px;
-  font-weight: 800;
-  color: #263a29;
+.how-it-works .step {
+  display: flex;
+  align-items: center;
   margin-bottom: 16px;
 }
 
-.info-text p {
-  font-size: 18px;
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 0;
-}
-
-.info-image {
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto; /* Center image inside its column if needed */
+.how-it-works .step-number {
+  background-color: #283618;
+  color: white;
+  font-weight: 800;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 16px;
 }
 
 .kit-section {
-  margin: 120px 0; /* Top and bottom margin */
-}
-
-.kit-section .grid-container {
-  text-align: center; /* Center align the text and images inside */
-}
-
-.kit-section h2 {
+  margin: 120px 0;
   text-align: left;
-  font-size: 40px;
-  font-weight: 800;
-  color: #263a29;
-  margin-bottom: 48px;
 }
 
 .kit-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* center each item itself */
+  text-align: center;  /* center p under the image */
   gap: 16px;
 }
 
@@ -741,10 +744,16 @@ form button {
   height: auto;
   border-radius: 16px;
   object-fit: cover;
-  background-color: #ccc; /* placeholder gray background */
 }
 
-/* MOBILE HERO ADJUSTMENTS */
+.info-image {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-radius: 24px;
+}
+
+
+/* MOBILE HERO ADJUSTMENTS, info and kit */
 @media (max-width: 768px) {
   .hero-section {
     padding: 40px 0;
@@ -768,19 +777,11 @@ form button {
   }
 
   .hero-section .grid-container {
-    text-align: center;
-  }
-
-  .hero-text {
-    text-align: center;
+    text-align: left;
   }
 
   .info-section {
     margin: 80px 0;
-  }
-
-  .info-text {
-    text-align: center;
   }
 
   .info-text h2 {
@@ -794,6 +795,7 @@ form button {
   .info-image {
     margin-top: 24px;
   }
+  
 }
 
 
@@ -897,21 +899,23 @@ form button {
 }
 
 
-.about-section,
-.kit-contents,
+.what-is-sprouted,
 .how-it-works,
-.importance-section,
-.resources-grid {
+.kit-section,
+.why-it-matters,
+.resources
+ {
   text-align: left;
-  margin: 96px var(--grid-margin);
+  margin-top: 96px;
+  margin-bottom: 96px;
 }
 
-.about-section h2,
-.kit-contents h2,
+.what-is-sprouted h2,
 .how-it-works h2,
-.importance-section h2,
-.resources-grid h2 {
-  font-size: 48px;
+.kit-section h2,
+.why-it-matters h2,
+.resources h2 {
+  font-size: 36px;
   font-weight: 800;
   color: #263a29;
   margin-bottom: 24px;
@@ -919,7 +923,7 @@ form button {
 
 .about-section p,
 .how-it-works p,
-.importance-section p {
+.resources p {
   font-size: 18px;
   color: #333;
   max-width: 600px;
@@ -992,7 +996,7 @@ form button {
   background-color: #E1747A;
   border-radius: 24px;
   color: white;
-  padding: 32px;
+  padding: 6px;
   text-align: center;
 }
 
@@ -1001,9 +1005,9 @@ form button {
 }
 
 .stat-card h3 {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 800;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .stat-card p {
