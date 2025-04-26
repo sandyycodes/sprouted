@@ -1061,14 +1061,15 @@ form button {
   background-color: #283618;
   color: white;
   font-weight: 800;
-  font-size: 24px;
+  font-size: 20px;
   border-radius: 50%;
   width: 48px;
-  height: 48px;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 
 .importance-grid {
   display: grid;
@@ -1127,10 +1128,15 @@ form button {
   padding: 24px;
   border-radius: 24px;
   background-color: #ccc; /* fallback color */
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease; /* smooth transition */
   width: 100%;
   box-sizing: border-box;
 }
+
+.resource-link:hover {
+  transform: scale(1.05); /* <-- add this! */
+}
+
 
 .resource-link img {
   width: 100%;
