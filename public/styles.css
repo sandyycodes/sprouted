@@ -738,9 +738,15 @@ form button {
 }
 
 .info-section .grid-container {
-  align-items: center;
+  align-items: start;
   
 }
+
+.how-it-works .info-text {
+  margin-top: 0;
+  padding-top: 0;
+}
+
 
 .how-it-works .steps {
   margin-top: 32px;
@@ -817,6 +823,17 @@ form button {
 
 /* Mobile view */
 @media (max-width: 768px) {
+
+  .navbar-toggle {
+    grid-column: span 4;
+    display: flex;
+    justify-content: center; /* ← Center it */
+    align-items: center;
+    font-size: 32px;
+    height: auto;
+    padding: 0;
+  }
+  
 
   .hero-section {
     padding: 40px 0;
@@ -1010,6 +1027,10 @@ form button {
   font-weight: 800;
   color: #263a29;
   margin-bottom: 24px;
+}
+
+.how-it-works h2{
+  margin-top: 0;
 }
 
 .about-section p,
@@ -1279,6 +1300,12 @@ form button {
     height: auto;
     padding: 0;
   }
+
+  #navbar-toggle.open {
+    justify-content: center; 
+    grid-column: span 4; 
+  }
+  
   
   .navbar-logo-img {
     height: 32px; /* smaller logo */
