@@ -31,7 +31,7 @@
     <!-- Main Garden Page -->
     <main class="garden-page">
         <div class="grid-container">
-            <section class="grid-col-span-12">
+            <section class="grid-col-span-12 page-header">
                 <h1>MY GARDEN</h1>
                 <p class="subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get
                     started!</p>
@@ -42,14 +42,14 @@
                 <div class="garden-card-wrapper">
                     <div class="garden-card">
                         <img src="images/register-plant.png" alt="Register a Plant" class="card-image">
-                        <a href="#register" class="wide-btn">Register a New Plant</a>
+                        <a href="#register" class="btn wide-btn">Register a New Plant</a>
                     </div>
                 </div>
 
                 <div class="garden-card-wrapper">
                     <div class="garden-card">
                         <img src="images/check-plant.png" alt="Check a Plant" class="card-image">
-                        <a href="#check" class="wide-btn">Check on a Plant</a>
+                        <a href="#check" class="btn wide-btn">Check on a Plant</a>
                     </div>
                 </div>
             </section>
@@ -79,7 +79,7 @@
                             title="Date your plant was planted">❓</span></label>
                     <input type="date" id="plantBirthday" name="plantBirthday" required>
 
-                    <button type="submit" class="wide-btn">Submit</button>
+                    <button type="submit" class="btn wide-btn">Submit</button>
                 </form>
             </section>
 
@@ -94,7 +94,7 @@
       <form id="checkForm" class="check-form">
         <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
         <input type="text" id="checkId" name="checkId" required>
-        <button type="submit" class="wide-btn">Submit</button>
+        <button type="submit" class="btn wide-btn">Submit</button>
       </form>
   
       <!-- Right: Plant Data -->
@@ -126,7 +126,7 @@
     <div id="confirmationModal" class="modal hidden">
         <div class="modal-content">
             <p id="modal-message"></p>
-            <button id="modal-close" class="modal-btn">Ok</button>
+            <button id="modal-close" class="btn modal-btn">Ok</button>
         </div>
     </div>
 
