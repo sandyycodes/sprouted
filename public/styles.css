@@ -770,6 +770,14 @@ form button {
   text-align: left;
 }
 
+.kit-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+
 .kit-item {
   display: flex;
   flex-direction: column;
@@ -807,8 +815,9 @@ form button {
 
 
 
-/* MOBILE HERO ADJUSTMENTS, info and kit */
+/* Mobile view */
 @media (max-width: 768px) {
+
   .hero-section {
     padding: 40px 0;
   }
@@ -866,13 +875,16 @@ form button {
     font-size: 20px; /* a little smaller font if needed */
     padding-right: 48px; /* slightly tighter spacing between quotes */
   }
+
+  .how-it-works .grid-col-span-6:first-child {
+    order: 2; /* image block */
+  }
   
-}
+  .how-it-works .grid-col-span-6:last-child {
+    order: 1; /* text block */
+  }
+  
 
-
-
-/* Mobile view stacks vertically */
-@media (max-width: 768px) {
   .check-plant-container {
     flex-direction: column;
     gap: 24px;
@@ -1008,12 +1020,6 @@ form button {
   max-width: 600px;
 }
 
-.kit-items {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 32px;
-}
 
 .kit-item {
   text-align: center;
@@ -1077,6 +1083,7 @@ form button {
   color: white;
   padding: 6px;
   text-align: center;
+  margin-top: 24px;
 }
 
 .stat-card.secondary {
@@ -1098,11 +1105,19 @@ form button {
   margin-top: 96px;
 }
 
+
 .resources-links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 items side by side */
-  gap: 24px; /* spacing between rectangles */
+  grid-template-columns: repeat(4, 1fr); /* 4 items side by side */
+  gap: 24px; /* gap between items */
   margin-top: 32px;
+}
+
+.resource-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .resource-link {
@@ -1111,7 +1126,7 @@ form button {
   align-items: center;
   padding: 24px;
   border-radius: 24px;
-  background-color: #ccc; /* default fallback */
+  background-color: #ccc; /* fallback color */
   transition: transform 0.2s ease;
   width: 100%;
   box-sizing: border-box;
@@ -1120,12 +1135,23 @@ form button {
 .resource-link img {
   width: 100%;
   height: auto;
+  border-radius: 12px;
   object-fit: contain;
 }
 
-.resource-link:hover {
-  transform: translateY(-4px);
+.resource-item p {
+  margin-top: 12px; /* 12px gap */
+  font-size: 18px;
+  font-weight: 600;
+  color: #263a29;
 }
+
+.resource-link.orange-bg { background-color: #E5842E; }
+.resource-link.yellow-bg { background-color: #FEEC7F; }
+.resource-link.olive-bg { background-color: #606C37; }
+.resource-link.pink-bg { background-color: #EC8388; }
+
+
 
 
 .footer {
@@ -1310,15 +1336,6 @@ form button {
     font-size: 36px;
   }
 
-  /* .garden-card-grid {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .garden-card-wrapper {
-    width: 100%;
-  } */
-
   .garden-card-grid {
     flex-direction: column;
     
@@ -1329,7 +1346,6 @@ form button {
     margin-bottom: 24px; /* ← This creates vertical space between stacked cards */
   }
 
-  /* Optional: remove margin on the last card */
   .garden-card-wrapper:last-child {
     margin-bottom: 0;
   }
@@ -1396,14 +1412,19 @@ form button {
   padding: 32px;
 }
 
-
-.resources-links {
-  grid-template-columns: 1fr; /* stack vertically */
+.kit-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
   gap: 24px;
 }
 
+.resources-links {
+  grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  gap: 24px; /* nice spacing */
+}
+
 .resource-link {
-  padding: 32px; /* bigger padding on mobile */
+  padding: 12px; /* bigger padding on mobile */
 }
 
 .footer .grid-container {
