@@ -613,6 +613,19 @@ form button {
 
 .hero-text {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  margin: 0; /* make sure there’s no margin in the container */
+}
+
+.hero-text h1,
+.hero-text p,
+.hero-text .cta-btn {
+  margin-top: 0; /* remove browser default margin */
+
 }
 
 .hero-text h1 {
@@ -655,6 +668,82 @@ form button {
   display: block;
 }
 
+/*About - What is Sprouted?*/
+
+.info-section {
+  margin: 120px 0; /* Top and bottom margin to create breathing room */
+}
+
+.info-section .grid-container {
+  align-items: center; /* Vertically center text and image */
+}
+
+.info-text {
+  text-align: left;
+}
+
+.info-text h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #263a29;
+  margin-bottom: 16px;
+}
+
+.info-text p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.info-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto; /* Center image inside its column if needed */
+}
+
+.kit-section {
+  margin: 120px 0; /* Top and bottom margin */
+}
+
+.kit-section .grid-container {
+  text-align: center; /* Center align the text and images inside */
+}
+
+.kit-section h2 {
+  text-align: left;
+  font-size: 40px;
+  font-weight: 800;
+  color: #263a29;
+  margin-bottom: 48px;
+}
+
+.kit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.kit-item p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #263a29;
+  margin-bottom: 8px;
+}
+
+.kit-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  background-color: #ccc; /* placeholder gray background */
+}
+
 /* MOBILE HERO ADJUSTMENTS */
 @media (max-width: 768px) {
   .hero-section {
@@ -684,6 +773,26 @@ form button {
 
   .hero-text {
     text-align: center;
+  }
+
+  .info-section {
+    margin: 80px 0;
+  }
+
+  .info-text {
+    text-align: center;
+  }
+
+  .info-text h2 {
+    font-size: 32px;
+  }
+
+  .info-text p {
+    font-size: 16px;
+  }
+
+  .info-image {
+    margin-top: 24px;
   }
 }
 
@@ -717,11 +826,6 @@ form button {
   }
 }
 
-/* === KEEPING ALL YOUR EXISTING STYLES === */
-
-/* (your full current styles stay exactly as you posted above) */
-
-/* === NEW ABOUT PAGE (index.html) STYLES === */
 
 .about-hero {
   background-color: #96A956;
@@ -767,20 +871,31 @@ form button {
   overflow: hidden;
   background-color: #283618;
   white-space: nowrap;
+  padding: 12px;
 }
 
 .animated-strip-content {
-  display: inline-block;
-  padding: 16px 0;
-  color: white;
-  font-size: 24px;
+  display: inline-flex; /* <-- changed to flex to arrange paragraphs side by side */
   animation: scroll-left 20s linear infinite;
 }
 
-@keyframes scroll-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+.animated-strip-content p {
+  display: inline-block;
+  color: white;
+  font-size: 24px;
+  padding-right: 72px; /* spacing between repetitions */
+  margin: 0;
 }
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* only move halfway because now there's two copies */
+  }
+}
+
 
 .about-section,
 .kit-contents,
