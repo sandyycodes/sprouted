@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About SproutEd</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About SproutEd</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -17,62 +17,166 @@
           <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
         </a>
       </div>
-  
       <div class="grid-col-span-6 navbar-links" id="navbar-links">
         <a href="index.html" class="nav-link active" id="about-link">ABOUT</a>
         <a href="leaderboard.html" class="nav-link" id="leaderboard-link">LEADERBOARD</a>
         <a href="myGarden.html" class="nav-link" id="garden-link">MY GARDEN</a>
       </div>
-  
       <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
     </div>
   </div>
 
-    <div class="about-hero">
-        <div class="about-hero-image"></div>
-        <div class="about-hero-text">
-            <h1>Growing More, Wasting Less</h1>
-            <p>SproutEd is a hands-on plant kit and STEM challenge that helps students build better habits around food through gardening and play.</p>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <div class="grid-container">
+        <div class="grid-col-span-6 hero-text">
+          <h1>Growing More,<br>Wasting Less</h1>
+          <p>SproutEd is a hands-on plant kit and STEM challenge that helps students build better habits around food through gardening and play.</p>
+          <button class="cta-btn">Grow With Us</button>
         </div>
+        <div class="grid-col-span-6 hero-image-wrapper">
+          <img src="images/about-hero-image.png" alt="Hero Image" class="hero-image" />
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="about-section">
-        <h2>Our Mission</h2>
+  <!-- Animated Strip -->
+  <section class="scroll-strip">
+    <div class="strip-inner">
+      <p>🌱 Waste Less &nbsp; 🌿 Grow More &nbsp; 🌱 Waste Less &nbsp; 🌿 Grow More &nbsp; 🌱 Waste Less &nbsp; 🌿 Grow More &nbsp;</p>
+    </div>
+  </section>
+
+  <!-- What is SproutEd -->
+  <section class="info-section">
+    <div class="grid-container">
+      <div class="grid-col-span-6 info-text">
+        <h2>What is SproutEd?</h2>
         <p>SproutEd started as a way to rethink food education and combat food waste by reconnecting students with the source of their food. It’s a tool to make healthy eating habits more approachable, gardening more rewarding, and sustainable practices easier.</p>
+      </div>
+      <div class="grid-col-span-6">
+        <img src="images/whats-sprouted.png" alt="What is SproutEd" class="info-image" />
+      </div>
     </div>
+  </section>
 
-    <div class="about-section">
-        <h2>How It Works</h2>
+  <!-- What's in a Kit -->
+  <section class="kit-section">
+    <div class="grid-container">
+      <div class="grid-col-span-12">
+        <h2>What's in a Kit?</h2>
+      </div>
+      <div class="grid-col-span-3 kit-item">
+        <p>Sensor Box</p>
+        <img src="images/placeholder.png" alt="Sensor Box" class="kit-image" />
+      </div>
+      <div class="grid-col-span-3 kit-item">
+        <p>Plant Pot + Saucer</p>
+        <img src="images/placeholder.png" alt="Plant Pot" class="kit-image" />
+      </div>
+      <div class="grid-col-span-3 kit-item">
+        <p>Soil Disc</p>
+        <img src="images/placeholder.png" alt="Soil Disc" class="kit-image" />
+      </div>
+      <div class="grid-col-span-3 kit-item">
+        <p>Seeds</p>
+        <img src="images/placeholder.png" alt="Seeds" class="kit-image" />
+      </div>
+    </div>
+  </section>
+
+  <!-- How Does it Work -->
+  <section class="info-section">
+    <div class="grid-container">
+      <div class="grid-col-span-6">
+        <img src="images/placeholder.png" alt="How it Works" class="info-image" />
+      </div>
+      <div class="grid-col-span-6 info-text">
+        <h2>How Does it Work?</h2>
         <p>Each SproutEd kit includes everything you need to start growing your own plant and to compete on a live leaderboard. Sensor data from the plant updates in real-time, helping students stay engaged and motivated to care for their plant.</p>
-    </div>
-
-    <div class="about-cards-row">
-        <div class="about-card">
-            <div class="about-card-image"></div>
-            <p>Build Your Kit</p>
+        <div class="steps">
+          <div class="step"><span class="step-number">1</span> Unpack your kit and connect your sensor box.</div>
+          <div class="step"><span class="step-number">2</span> Track moisture, sunlight, and growth progress.</div>
+          <div class="step"><span class="step-number">3</span> Compete with others while learning about food systems.</div>
         </div>
-        <div class="about-card">
-            <div class="about-card-image"></div>
-            <p>Track Your Progress</p>
-        </div>
-        <div class="about-card">
-            <div class="about-card-image"></div>
-            <p>Compete & Learn</p>
-        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="about-cta">
-        <a href="leaderboard.html" class="wide-btn">View Leaderboard</a>
-        <a href="myGarden.html" class="wide-btn">Learn More</a>
+  <!-- Why It Matters -->
+  <section class="info-section">
+    <div class="grid-container">
+      <div class="grid-col-span-6 info-text">
+        <h2>Why It Matters</h2>
+        <p>Food waste is a major issue in the U.S. and particularly impacts young people. By teaching food literacy through gardening, SproutEd hopes to cultivate habits that reduce waste and promote healthier food practices early in life.</p>
+      </div>
+      <div class="grid-col-span-6">
+        <img src="images/placeholder.png" alt="Why it Matters" class="info-image" />
+      </div>
+      <div class="grid-col-span-6">
+        <div class="stat-card pink">
+          <h3>133 Billion</h3>
+          <p>pounds of food is wasted every year in America.</p>
+        </div>
+      </div>
+      <div class="grid-col-span-6">
+        <div class="stat-card orange">
+          <h3>39%</h3>
+          <p>of NYC public schools have no food education programming.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        const toggleBtn = document.getElementById('navbar-toggle');
-        const navLinks = document.getElementById('navbar-links');
-        toggleBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('show');
-        });
-    </script>
+  <!-- Resources -->
+  <section class="resources-section">
+    <div class="grid-container">
+      <div class="grid-col-span-12">
+        <h2>Resources</h2>
+      </div>
+      <div class="grid-col-span-4">
+        <a href="https://www.google.com" target="_blank"><img src="images/placeholder.png" alt="Resource 1" class="resource-img" /></a>
+      </div>
+      <div class="grid-col-span-4">
+        <a href="https://www.google.com" target="_blank"><img src="images/placeholder.png" alt="Resource 2" class="resource-img" /></a>
+      </div>
+      <div class="grid-col-span-4">
+        <a href="https://www.google.com" target="_blank"><img src="images/placeholder.png" alt="Resource 3" class="resource-img" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="grid-container">
+      <div class="grid-col-span-6 footer-left">
+        <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="footer-logo" />
+        <p>SproutEd is an interactive plant growing kit made to inspire a future where we grow more and waste less.</p>
+      </div>
+      <div class="grid-col-span-3">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">About</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="myGarden.html">My Garden</a></li>
+        </ul>
+      </div>
+      <div class="grid-col-span-3">
+        <h4>Contact</h4>
+        <p>sprouted.team@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('navbar-toggle');
+    const navLinks = document.getElementById('navbar-links');
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
 </body>
 
 </html>
