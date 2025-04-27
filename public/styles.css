@@ -455,6 +455,7 @@ html {
 
 .form-section {
   margin-top: 80px;
+  text-align: center;
 }
 
 .form-section h2 {
@@ -503,12 +504,16 @@ form button {
 }
 
 
+
 .register-form {
-  max-width: 48%;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
 
 .register-form input[type="text"],
 .register-form input[type="date"],
@@ -950,6 +955,10 @@ form button {
   
   .how-it-works .grid-col-span-6:last-child {
     order: 1; /* text block */
+  }
+
+  .form-section {
+    text-align: left;
   }
   
 
