@@ -61,8 +61,12 @@
                 <h2>Register a New Plant</h2>
                 <p>Input your plant details to get started with SproutEd's monitoring system.</p>
                 <form id="registerForm" class="register-form">
-                    <!-- inputs -->
-                    <label for="plantId">Plant ID: <span title="Your device’s unique plant ID">❓</span></label>
+                    <label for="plantId">Plant ID:
+                        <span class="info-icon-container">
+                          <img src="images/info-icon.png" alt="Info Icon" class="info-icon">
+                          <span class="tooltip-text">Plant ID can be found on the name tag sticker on your plant pot.</span>
+                        </span>
+                      </label>
                     <input type="text" id="plantId" name="plantId" required>
 
                     <label for="plantType">Plant Type:</label>
@@ -76,8 +80,13 @@
                     <label for="plantName">Plant Name:</label>
                     <input type="text" id="plantName" name="plantName" required>
 
-                    <label for="plantBirthday">Plant Birthday: <span
-                            title="Date your plant was planted">❓</span></label>
+                    <label for="plantBirthday">
+                        Plant Birthday:
+                        <span class="info-icon-container">
+                            <img src="images/info-icon.png" alt="Info Icon" class="info-icon" id="birthday-info" />
+                            <span class="tooltip-text">The date you planted the seeds.</span>
+                        </span>
+                    </label>
                     <input type="date" id="plantBirthday" name="plantBirthday" required>
 
                     <button type="submit" class="btn wide-btn">Submit</button>
@@ -85,40 +94,40 @@
             </section>
 
             <!-- Check Section -->
-<section class="grid-col-span-12 form-section" id="check">
-    <img src="images/check-plant-banner (1).png" alt="Check Banner" class="form-image">
-    <h2>Check on a Plant</h2>
-    <p>Enter the Plant ID to check the latest updates and status.</p>
-  
-    <div class="check-plant-container">
-      <!-- Left: Form -->
-      <form id="checkForm" class="check-form">
-        <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
-        <input type="text" id="checkId" name="checkId" required>
-        <button type="submit" class="btn wide-btn">Submit</button>
-      </form>
-  
-      <!-- Right: Plant Data -->
-      <div class="plant-data-panel">
-        <h3 id="plantDataTitle">Plant Data</h3>
-        <div class="plant-data-grid">
-          <div class="plant-data-box">
-            <h4>Moisture:</h4>
-            <p id="moistureData">N/A</p>
-          </div>
-          <div class="plant-data-box">
-            <h4>Humidity:</h4>
-            <p id="humidityData">N/A</p>
-          </div>
-          <div class="plant-data-box">
-            <h4>Temperature:</h4>
-            <p id="tempData">N/A</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+            <section class="grid-col-span-12 form-section" id="check">
+                <img src="images/check-plant-banner (1).png" alt="Check Banner" class="form-image">
+                <h2>Check on a Plant</h2>
+                <p>Enter the Plant ID to check the latest updates and status.</p>
+
+                <div class="check-plant-container">
+                    <!-- Left: Form -->
+                    <form id="checkForm" class="check-form">
+                        <label for="checkId">Plant ID: <span title="Enter your plant’s ID">❓</span></label>
+                        <input type="text" id="checkId" name="checkId" required>
+                        <button type="submit" class="btn wide-btn">Submit</button>
+                    </form>
+
+                    <!-- Right: Plant Data -->
+                    <div class="plant-data-panel">
+                        <h3 id="plantDataTitle">Plant Data</h3>
+                        <div class="plant-data-grid">
+                            <div class="plant-data-box">
+                                <h4>Moisture:</h4>
+                                <p id="moistureData">N/A</p>
+                            </div>
+                            <div class="plant-data-box">
+                                <h4>Humidity:</h4>
+                                <p id="humidityData">N/A</p>
+                            </div>
+                            <div class="plant-data-box">
+                                <h4>Temperature:</h4>
+                                <p id="tempData">N/A</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
         </div>
     </main>
@@ -142,6 +151,7 @@
         toggleBtn.addEventListener('click', () => {
             navLinks.classList.toggle('show');
         });
+
     </script>
 </body>
 

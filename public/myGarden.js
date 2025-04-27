@@ -112,4 +112,26 @@ document.addEventListener("DOMContentLoaded", function () {
       showModal("Error", error.message, true);
     }
   });
+
+  const tooltipContainers = document.querySelectorAll('.info-icon-container');
+
+  tooltipContainers.forEach(container => {
+    const tooltip = container.querySelector('.tooltip-text');
+
+    container.addEventListener('mouseenter', adjustTooltip);
+    container.addEventListener('click', adjustTooltip); // for mobile tap
+
+    function adjustTooltip() {
+      const rect = tooltip.getBoundingClientRect();
+      const margin = 8; // 8px gap from the edge
+      tooltip.style.left = '50%'; // reset
+      tooltip.style.transform = 'translateX(-50%)'; // reset
+
+      if (rect.left < margin) {
+        tooltip.style.left = `${margin}px`;
+        tooltip.style.transform = 'none'; 
+      }
+    }
+  });
+  
 });

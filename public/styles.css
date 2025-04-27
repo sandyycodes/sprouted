@@ -523,6 +523,68 @@ form button {
   margin-top: 24px;
 }
 
+.info-icon-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px; /* little spacing from label text */
+  cursor: pointer;
+}
+
+.info-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: #263a29;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 100;
+  bottom: 150%; /* appear above */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: max-content;
+  max-width: 300px; /* widen the box */
+  font-size: 14px;
+  white-space: wrap; /* prevent breaking into two lines */
+  box-sizing: border-box;
+}
+
+/* Little arrow */
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* below the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #263a29 transparent transparent transparent;
+}
+
+/* Show tooltip on hover or click */
+.info-icon-container:hover .tooltip-text,
+.info-icon-container:active .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+/* Show tooltip on hover for desktop */
+.info-icon-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 .garden-card-grid {
   display: flex;
   gap: 32px;
@@ -914,6 +976,15 @@ form button {
 
   .plant-data-box {
     width: 84%; /* Add margin from edges */
+  }
+
+  .tooltip-text {
+    max-width: 260px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: normal; /* allow wrapping only if necessary */
+    word-break: break-word;
+    padding: 10px 16px;
   }
 }
 
