@@ -521,6 +521,23 @@ form button {
   width: 100%;
 }
 
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+/* Adjust width of the input if needed */
+.input-wrapper input[type="date"] {
+  width: 100%;
+  margin-top: 8px;
+}
+
+
 .register-form .wide-btn {
   width: 48%;
   align-self: center;
