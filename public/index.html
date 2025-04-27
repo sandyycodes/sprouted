@@ -23,7 +23,7 @@
         <a href="leaderboard.html" class="nav-link" id="leaderboard-link">LEADERBOARD</a>
         <a href="myGarden.html" class="nav-link" id="garden-link">MY GARDEN</a>
       </div>
-      <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
+      <div class="navbar-toggle" id="navbar-toggle">☰</div>
     </div>
   </div>
 
@@ -237,10 +237,27 @@
   <script>
     const toggleBtn = document.getElementById('navbar-toggle');
     const navLinks = document.getElementById('navbar-links');
-    toggleBtn.addEventListener('click', () => {
+  
+    function closeMenu() {
+      navLinks.classList.remove('show');
+      toggleBtn.classList.remove('open');
+    }
+  
+    toggleBtn.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevents event from bubbling up
       navLinks.classList.toggle('show');
+      toggleBtn.classList.toggle('open');
+    });
+  
+    document.addEventListener('click', (event) => {
+      const isClickInsideMenu = navLinks.contains(event.target) || toggleBtn.contains(event.target);
+  
+      if (!isClickInsideMenu) {
+        closeMenu();
+      }
     });
   </script>
+  
 </body>
 
 </html>

@@ -32,19 +32,11 @@ body {
 
 /* Navbar-specific grid */
 .navbar .grid-container {
-  width: 100%;
-  max-width: var(--grid-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--grid-padding);
-  padding-right: var(--grid-padding);
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  column-gap: var(--grid-gutter);
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px var(--grid-padding);
+
 }
 
 /* Grid column spans */
@@ -823,16 +815,7 @@ form button {
 
 /* Mobile view */
 @media (max-width: 768px) {
-
-  .navbar-toggle {
-    grid-column: span 4;
-    display: flex;
-    justify-content: center; /* ← Center it */
-    align-items: center;
-    font-size: 32px;
-    height: auto;
-    padding: 0;
-  }
+  
   
 
   .hero-section {
@@ -1121,6 +1104,8 @@ form button {
 .stat-card p {
   font-size: 18px;
   font-weight: 600;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .resources-grid {
@@ -1292,13 +1277,14 @@ form button {
   }
   
   .navbar-toggle {
-    grid-column: span 2;
-    display: flex;
-    justify-content: flex-end;
+    display: inline-flex;
+    justify-content: center;
     align-items: center;
-    font-size: 28px;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 8px;
+    width: auto;
     height: auto;
-    padding: 0;
   }
 
   #navbar-toggle.open {
@@ -1330,17 +1316,26 @@ form button {
     font-size: 14px;
   }
 
-
   .navbar-links {
     display: none;
+    position: fixed; /* <-- Make it float outside the flex container */
+    top: 70px; /* Approximate height of navbar */
+    left: 0;
+    width: 100vw; /* Full screen width */
+    background-color: #f5f1e5; /* Match your body background */
     flex-direction: column;
-    width: 100%;
-    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px 0;
+    z-index: 999; /* Stay above everything */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
-
+  
   .navbar-links.show {
     display: flex;
   }
+  
 
   .navbar-links a {
     padding: 10px 0;
