@@ -80,14 +80,14 @@
                     <label for="plantName">Plant Name:</label>
                     <input type="text" id="plantName" name="plantName" required>
 
-                    <label for="plantBirthday">
-                        Plant Birthday:
+                    <div class="input-wrapper">
+                        <label for="plantBirthday">Plant Birthday:</label>
                         <span class="info-icon-container">
-                            <img src="images/info-icon.png" alt="Info Icon" class="info-icon" id="birthday-info" />
-                            <span class="tooltip-text">The date you planted the seeds.</span>
+                          <img src="images/info-icon.png" alt="Info Icon" class="info-icon" id="birthday-info" />
+                          <span class="tooltip-text">The date you planted the seeds.</span>
                         </span>
-                    </label>
-                    <input type="date" id="plantBirthday" name="plantBirthday" required>
+                        <input type="date" id="plantBirthday" name="plantBirthday" required>
+                      </div>
 
                     <button type="submit" class="btn wide-btn">Submit</button>
                 </form>
