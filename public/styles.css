@@ -526,7 +526,7 @@ form button {
 .info-icon-container {
   position: relative;
   display: inline-block;
-  margin-left: 8px; /* little spacing from label text */
+  margin-left: 12px; 
   cursor: pointer;
 }
 
