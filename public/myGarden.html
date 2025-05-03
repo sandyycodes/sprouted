@@ -57,10 +57,12 @@
 
             <!-- Register Section -->
             <section class="grid-col-span-12 form-section" id="register">
-                <img src="images/register-plant-banner (1).png" alt="Register Banner" class="form-image">
+                <img src="images/register-plant-banner.png" alt="Register Banner" class="form-image">
                 <h2>Register a New Plant</h2>
                 <p>Input your plant details to get started with SproutEd's monitoring system.</p>
                 <form id="registerForm" class="register-form">
+
+                <div class="input-wrapper">
                     <label for="plantId">Plant ID:
                         <span class="info-icon-container">
                           <img src="images/info-icon.png" alt="Info Icon" class="info-icon">
@@ -80,7 +82,6 @@
                     <label for="plantName">Plant Name:</label>
                     <input type="text" id="plantName" name="plantName" required>
 
-                    <div class="input-wrapper">
                         <label for="plantBirthday">Plant Birthday:</label>
                         <span class="info-icon-container">
                           <img src="images/info-icon.png" alt="Info Icon" class="info-icon" id="birthday-info" />
@@ -95,21 +96,24 @@
 
             <!-- Check Section -->
             <section class="grid-col-span-12 form-section" id="check">
-                <img src="images/check-plant-banner (1).png" alt="Check Banner" class="form-image">
+                <img src="images/check-plant-banner.png" alt="Check Banner" class="form-image">
                 <h2>Check on a Plant</h2>
                 <p>Enter the Plant ID to check the latest updates and status.</p>
 
                 <div class="check-plant-container">
                     <!-- Left: Form -->
                     <form id="checkForm" class="check-form">
-                        <label for="checkId">Plant ID:
-                            <span class="info-icon-container">
-                              <img src="images/info-icon.png" alt="Info Icon" class="info-icon">
-                              <span class="tooltip-text">Located on plant pot name tag (ex. ESP1111).</span>
-                            </span>
-                          </label>
-                        <input type="text" id="checkId" name="checkId" required>
-                        <button type="submit" class="btn wide-btn">Submit</button>
+                    
+                            <label for="checkId">Plant ID:
+                                <span class="info-icon-container">
+                                <img src="images/info-icon.png" alt="Info Icon" class="info-icon">
+                                <span class="tooltip-text">Located on plant pot name tag (ex. ESP1111).</span>
+                                </span>
+                            </label>
+                            <input type="text" id="checkId" name="checkId" required>
+                        
+                            <button type="submit" class="btn wide-btn">Submit</button>
+                        
                     </form>
 
                     <!-- Right: Plant Data -->
