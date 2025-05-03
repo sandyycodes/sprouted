@@ -35,14 +35,6 @@ html {
   column-gap: var(--grid-gutter);
 }
 
-/* Navbar-specific grid */
-/* .navbar .grid-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px var(--grid-padding);
-
-} */
 
 .navbar-inner {
   display: flex;
@@ -916,13 +908,45 @@ form button {
   
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
+  .navbar .grid-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px var(--grid-padding);
+  }
+
+  .navbar-logo {
+    margin-right: auto;
+  }
+
+  .navbar-links {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 48px;
+    position: static;
+    flex-direction: row;
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+  .navbar-links a {
+    padding: 0;
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+
   .form-subtext {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
   }
 }
+
 
 @media (max-width: 768px) {
   
@@ -1426,17 +1450,7 @@ form button {
   .navbar-links.show {
     display: flex;
   }
-  
-  /* .navbar-toggle {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    cursor: pointer;
-    padding: 8px;
-    width: auto;
-    height: auto;
-  } */
+
 
   #navbar-toggle.open {
     justify-content: center; 
