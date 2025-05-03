@@ -18,7 +18,7 @@ html {
   --grid-columns: 12;
   --grid-gutter: 32px;
   --grid-padding: 32px;
-  --grid-max-width: 1280px; /* Set your hard limit for desktop layout */
+  --grid-max-width: 1280px; 
 }
 
 /* Universal Grid Container */
@@ -57,7 +57,6 @@ html {
 .navbar-logo {
   display: flex;
   align-items: center;
-  /* 👇 Make sure it aligns left with grid */
   justify-content: flex-start;
 }
 
@@ -65,7 +64,6 @@ html {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  /* 👇 Reset any unwanted spacing */
   padding: 0;
   margin: 0;
 }
@@ -138,10 +136,8 @@ html {
 }
 
 
-
-/* New Image Wrapper Classes */
 .image-wrapper {
-  background-color: #ccc; /* fallback */
+  background-color: #ccc;
   padding: 24px;
   border-radius: 24px;
   display: flex;
@@ -156,7 +152,7 @@ html {
   object-fit: contain;
 }
 
-/* Specific Background Colors */
+
 .green-bg {
   background-color: #96A956;
 }
@@ -255,16 +251,16 @@ html {
 }
 
 .tab-button[data-plant="tomato"]:hover {
-  background-color: #f1a5aa; /* lighter tomato shade */
+  background-color: #f1a5aa; 
 }
 
 .tab-button[data-plant="basil"]:hover {
-  background-color: #f8c689; /* lighter basil shade */
+  background-color: #f8c689; 
 }
 
 .tab-button[data-plant="spinach"]:hover {
-  background-color: #a3b18a; /* lighter spinach shade */
-}
+    background-color: #a3b18a; 
+  }
 
 
 .toggle-buttons {
@@ -437,7 +433,7 @@ html {
   height: 200px;
   object-fit: cover;
   border-radius: 12px;
-  background-color: #ffffff; /* placeholder bg */
+  background-color: #ffffff; 
 }
 
 .wide-btn {
@@ -475,8 +471,7 @@ html {
 .form-image {
   width: 100%;
   height: auto; 
-  object-fit: cover; 
-  aspect-ratio: 3 / 1; 
+  object-fit: fill; 
   border-radius: 20px;
   display: block;
 }
@@ -532,7 +527,6 @@ form button {
   position: relative;
 }
 
-/* Adjust width of the input if needed */
 .input-wrapper input[type="date"] {
   width: 100%;
   margin-top: 8px;
@@ -568,23 +562,22 @@ form button {
   padding: 8px 12px;
   position: absolute;
   z-index: 100;
-  bottom: 150%; /* appear above */
+  bottom: 150%; 
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.3s;
   width: max-content;
-  max-width: 300px; /* widen the box */
+  max-width: 300px; 
   font-size: 14px;
-  white-space: wrap; /* prevent breaking into two lines */
+  white-space: wrap; 
   box-sizing: border-box;
 }
 
-/* Little arrow */
 .tooltip-text::after {
   content: "";
   position: absolute;
-  top: 100%; /* below the tooltip */
+  top: 100%; 
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
@@ -601,7 +594,6 @@ form button {
 
 
 
-/* Show tooltip on hover for desktop */
 .info-icon-container:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
@@ -767,13 +759,13 @@ form button {
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
-  margin: 0; /* make sure there’s no margin in the container */
+  margin: 0; 
 }
 
 .hero-text h1,
 .hero-text p,
 .hero-text .cta-btn {
-  margin-top: 0; /* remove browser default margin */
+  margin-top: 0;
 
 }
 
@@ -796,7 +788,6 @@ form button {
   width: 48%;
   color: white;
   padding: 14px 28px;
-  /* font-weight: 700; */
   font-size: 18px;
 }
 
@@ -869,8 +860,8 @@ form button {
 .kit-item {
   display: flex;
   flex-direction: column;
-  align-items: center; /* center each item itself */
-  text-align: left;  /* center p under the image */
+  align-items: center; 
+  text-align: left; 
   gap: 16px;
   margin-top: 32px;
 }
@@ -902,9 +893,6 @@ form button {
   
 }
 
-
-
-/* Mobile view */
 @media (max-width: 768px) {
   
   
@@ -957,22 +945,22 @@ form button {
   }
 
     .animated-strip {
-    width: 100vw; /* force exact width of viewport */
-    padding: 20px 0; /* more vertical padding for a bigger strip */
-    margin-top: 24px; /* slightly more space above it if you want */
+    width: 100vw; 
+    padding: 20px 0; 
+    margin-top: 24px; 
   }
 
   .animated-strip-content p {
-    font-size: 20px; /* a little smaller font if needed */
-    padding-right: 48px; /* slightly tighter spacing between quotes */
+    font-size: 20px; 
+    padding-right: 48px; 
   }
 
   .how-it-works .grid-col-span-6:first-child {
-    order: 2; /* image block */
+    order: 2; 
   }
   
   .how-it-works .grid-col-span-6:last-child {
-    order: 1; /* text block */
+    order: 1; 
   }
 
   .form-section {
@@ -996,20 +984,20 @@ form button {
 
   .plant-data-grid {
     flex-direction: column;
-    align-items: center; /* Center each card */
+    align-items: center; 
     padding: 12px;
     gap: 20px;
   }
 
   .plant-data-box {
-    width: 84%; /* Add margin from edges */
+    width: 84%; 
   }
 
   .tooltip-text {
     max-width: 260px;
     left: 50%;
     transform: translateX(-50%);
-    white-space: normal; /* allow wrapping only if necessary */
+    white-space: normal; 
     word-break: break-word;
     padding: 10px 16px;
   }
@@ -1057,22 +1045,22 @@ form button {
 
 .animated-strip {
   position: relative;
-  width: 100vw; /* FULL viewport width exactly */
+  width: 100vw; 
   left: 0;
   right: 0;
   overflow: hidden;
   background-color: #283618;
   white-space: nowrap;
-  padding: 12px 0; /* remove side padding */
-  margin-top: 16px; /* moves it downward a bit */
+  padding: 12px 0; 
+  margin-top: 16px; 
   box-sizing: border-box;
 }
 
 .animated-strip-content {
   display: inline-flex;
   animation: scroll-left 20s linear infinite;
-  width: max-content; /* prevent weird overflow */
-  padding: 0 32px; /* adds breathing room left/right */
+  width: max-content;
+  padding: 0 32px; 
 }
 
 .animated-strip-content p {
@@ -1089,7 +1077,7 @@ form button {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%); /* only move halfway because now there's two copies */
+    transform: translateX(-50%); 
   }
 }
 
@@ -1219,8 +1207,8 @@ form button {
 
 .resources-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items side by side */
-  gap: 24px; /* gap between items */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 24px; 
   margin-top: 32px;
 }
 
@@ -1237,14 +1225,14 @@ form button {
   align-items: center;
   padding: 24px;
   border-radius: 24px;
-  background-color: #ccc; /* fallback color */
-  transition: transform 0.2s ease; /* smooth transition */
+  background-color: #ccc; 
+  transition: transform 0.2s ease; 
   width: 100%;
   box-sizing: border-box;
 }
 
 .resource-link:hover {
-  transform: scale(1.05); /* <-- add this! */
+  transform: scale(1.05);
 }
 
 
@@ -1256,7 +1244,7 @@ form button {
 }
 
 .resource-item p {
-  margin-top: 12px; /* 12px gap */
+  margin-top: 12px; 
   font-size: 18px;
   font-weight: 600;
   color: #263a29;
@@ -1284,7 +1272,7 @@ form button {
   margin: 0 auto;
   padding: 64px var(--grid-padding);
   box-sizing: border-box;
-  align-items: start; /* TOP ALIGN */
+  align-items: start; 
 }
 
 .footer-left {
@@ -1398,7 +1386,7 @@ form button {
   
   
   .navbar-logo-img {
-    height: 32px; /* smaller logo */
+    height: 32px; 
   }
   
 
@@ -1422,17 +1410,17 @@ form button {
 
   .navbar-links {
     display: none;
-    position: fixed; /* <-- Make it float outside the flex container */
-    top: 70px; /* Approximate height of navbar */
+    position: fixed; 
+    top: 70px; 
     left: 0;
-    width: 100vw; /* Full screen width */
-    background-color: #f5f1e5; /* Match your body background */
+    width: 100vw; 
+    background-color: #f5f1e5;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 24px;
     padding: 24px 0;
-    z-index: 999; /* Stay above everything */
+    z-index: 999; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
   
@@ -1475,7 +1463,7 @@ form button {
 
   .garden-card-wrapper {
     width: 100%;
-    margin-bottom: 24px; /* ← This creates vertical space between stacked cards */
+    margin-bottom: 24px; 
   }
 
   .garden-card-wrapper:last-child {
@@ -1535,7 +1523,7 @@ form button {
 
 
 .form-image {
-  aspect-ratio: auto; /* or adjust ratio */
+  aspect-ratio: auto; 
   height: auto;
   max-width: 100%;
   object-fit: contain;
@@ -1553,40 +1541,40 @@ form button {
 }
 
 .resources-links {
-  grid-template-columns: repeat(2, 1fr); /* 2 per row */
-  gap: 24px; /* nice spacing */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 24px; 
 }
 
 .resource-link {
-  padding: 12px; /* bigger padding on mobile */
+  padding: 12px; 
 }
 
 .footer .grid-container {
-  grid-template-columns: repeat(4, 1fr); /* adjust to 4 columns on mobile */
-  padding: 32px var(--grid-margin); /* smaller side padding */
-  max-width: 100%; /* allow full width */
-  margin: 0; /* remove auto centering */
+  grid-template-columns: repeat(4, 1fr); 
+  padding: 32px var(--grid-margin); 
+  max-width: 100%; 
+  margin: 0; 
   box-sizing: border-box;
 }
 
 .footer-left {
-  grid-column: span 4; /* take all 4 columns */
-  margin-bottom: 32px; /* space between sections */
+  grid-column: span 4;
+  margin-bottom: 32px; 
 }
 
 .footer-section {
-  grid-column: span 2; /* each section (Pages, Contact) takes 2 columns */
+  grid-column: span 2;
 }
 
 .footer-logo {
-  width: 140px; /* slightly smaller logo */
+  width: 140px; 
 }
 
 .footer-left p,
 .footer-section a,
 .footer-section p,
 .footer-section h4 {
-  font-size: 14px; /* slightly smaller text for mobile */
+  font-size: 14px; 
 }
 
 }
