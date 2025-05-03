@@ -474,10 +474,11 @@ html {
 
 .form-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: auto; 
+  object-fit: cover; 
+  aspect-ratio: 3 / 1; 
   border-radius: 20px;
-  background-color: #ccc; /* placeholder bg */
+  display: block;
 }
 
 form {
@@ -1531,12 +1532,14 @@ form button {
   width: 100%;
 }
 
+
+
 .form-image {
-  width: 100%;
-  height: 120px;
-  object-fit: fill;
-  border-radius: 20px;
-  background-color: #ccc; /* placeholder bg */
+  aspect-ratio: auto; /* or adjust ratio */
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 .image-wrapper {
