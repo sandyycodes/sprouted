@@ -45,23 +45,36 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ device_id: plantId })
       });
-
+    
       const checkData = await checkRes.json();
-
+    
       if (checkRes.ok && checkData.exists) {
         showModal("Error", `A plant with ID '${plantId}' already exists.`, true);
         return;
       }
-
+    
+      const nameCheckRes = await fetch("/check-plant-name", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plantName })
+      });
+    
+      const nameCheckData = await nameCheckRes.json();
+    
+      if (nameCheckRes.ok && nameCheckData.exists) {
+        showModal("Error", `The plant name '${plantName}' is already taken. Please choose a different name.`, true);
+        return;
+      }
+    
       const payload = { device_id: plantId, plantType, plantName, birthday: plantBirthday };
       const updateRes = await fetch("/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-
+    
       const updateData = await updateRes.json();
-
+    
       if (updateRes.ok) {
         showModal("Plant Registration Successful!", `Plant '${plantName}' is now registered! Remember to pair your sensor box to WiFi to start scoring points.`);
         resetAfterClose = true;
@@ -71,12 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (error) {
       showModal("Error", error.message, true);
     }
+    
   });
 
   // Check form
   checkForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    const checkId = document.getElementById("checkId").value.trim();
+    const checkName = document.getElementById("checkName").value.trim();
 
     // Clear previous data
     moistureDisplay.textContent = "N/A";
@@ -88,11 +102,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const res = await fetch("/fetch-plant-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ device_id: checkId })
+        body: JSON.stringify({ plantName: checkName })
       });
 
       if (!res.ok) {
-        throw new Error("Plant ID not found.");
+        throw new Error("Plant name not found.");
       }
 
       const data = await res.json();
@@ -129,9 +143,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (rect.left < margin) {
         tooltip.style.left = `${margin}px`;
-        tooltip.style.transform = 'none'; 
+        tooltip.style.transform = 'none';
       }
     }
   });
-  
+
 });

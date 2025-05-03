@@ -36,13 +36,22 @@ html {
 }
 
 /* Navbar-specific grid */
-.navbar .grid-container {
+/* .navbar .grid-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px var(--grid-padding);
 
+} */
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--grid-padding);
+  box-sizing: border-box;
 }
+
 
 /* Grid column spans */
 .grid-col-span-12 { grid-column: span 12; }
@@ -178,7 +187,8 @@ html {
 
 .page-header {
   text-align: left;
-  margin: var(--grid-margin) 0;
+  margin: 0;
+  margin-bottom: 48px;
 }
 
 .page-header h1 {
@@ -200,11 +210,20 @@ html {
   margin-bottom: 0; 
 }
 
+.garden-subtitle {
+  margin-bottom: 48px;
+}
+
+.leaderboard-page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .leaderboard-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  margin-top: 50px; 
+  margin-top: 0; 
   margin-bottom: -1px; 
 }
 
@@ -409,11 +428,11 @@ html {
   margin-bottom: 8px;
 }
 
-.garden-page .subtitle {
+.garden-page .form-subtext {
   font-size: 18px;
   font-weight: 400;
   color: #333;
-  margin-bottom: 48px;
+  margin-bottom: 60px;
 }
 
 .garden-card {
@@ -499,6 +518,10 @@ form button {
   font-size: 16px;
 }
 
+/* .form-subtext {
+  margin-bottom: 32px; 
+}
+ */
 
 
 .register-form {
@@ -891,6 +914,14 @@ form button {
   object-fit: cover;
   display: block;
   
+}
+
+@media (min-width: 768px) {
+  .form-subtext {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1359,16 +1390,44 @@ form button {
   }
 
   .navbar .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-    padding-left: var(--grid-margin);
-    padding-right: var(--grid-margin);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  
+
   .navbar-logo {
-    grid-column: span 2;
+    flex: 1;
+  }
+
+  .navbar-toggle {
+    display: block;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 8px;
+    color: #0a4938;
+    text-align: right;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: #f5f1e5;
+    z-index: 1000;
+    padding: 24px 0;
+  }
+
+  .navbar-links.show {
+    display: flex;
   }
   
-  .navbar-toggle {
+  /* .navbar-toggle {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -1377,7 +1436,7 @@ form button {
     padding: 8px;
     width: auto;
     height: auto;
-  }
+  } */
 
   #navbar-toggle.open {
     justify-content: center; 

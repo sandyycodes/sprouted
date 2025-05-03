@@ -12,29 +12,28 @@
 <body>
     <!-- Navigation Bar -->
     <div class="navbar">
-        <div class="navbar-inner">
-            <div class="grid-container">
-                <div class="grid-col-span-6 navbar-logo">
-                    <a href="index.html">
-                        <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
-                    </a>
-                </div>
-                <div class="grid-col-span-6 navbar-links" id="navbar-links">
-                    <a href="index.html" class="nav-link">ABOUT</a>
-                    <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
-                    <a href="myGarden.html" class="nav-link active">MY GARDEN</a>
-                </div>
-                <div class="grid-col-span-12 navbar-toggle" id="navbar-toggle">☰</div>
-            </div>
+        <div class="grid-container">
+          <div class="navbar-logo">
+            <a href="index.html">
+              <img src="images/sprouted-logo.svg" alt="SproutEd Logo" class="navbar-logo-img" />
+            </a>
+          </div>
+          <div class="navbar-toggle" id="navbar-toggle">☰</div>
+          <div class="navbar-links" id="navbar-links">
+            <a href="index.html" class="nav-link">ABOUT</a>
+            <a href="leaderboard.html" class="nav-link">LEADERBOARD</a>
+            <a href="myGarden.html" class="nav-link active">MY GARDEN</a>
+          </div>
         </div>
-    </div>
+      </div>
+      
 
     <!-- Main Garden Page -->
     <main class="garden-page">
         <div class="grid-container">
             <section class="grid-col-span-12 page-header">
                 <h1>MY GARDEN</h1>
-                <p class="subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get
+                <p class="garden-subtitle">View, register, and monitor the plants you're growing with SproutEd. Scroll to get
                     started!</p>
             </section>
 
@@ -59,7 +58,7 @@
             <section class="grid-col-span-12 form-section" id="register">
                 <img src="images/register-plant-banner.png" alt="Register Banner" class="form-image">
                 <h2>Register a New Plant</h2>
-                <p>Input your plant details to get started with SproutEd's monitoring system.</p>
+                <p class="form-subtext">Input your plant details to get started with SproutEd's monitoring system. Remember to write down the plant's name and birthday on the name tag sticker attached to the plant pot.</p>
                 <form id="registerForm" class="register-form">
 
                 <div class="input-wrapper">
@@ -98,19 +97,19 @@
             <section class="grid-col-span-12 form-section" id="check">
                 <img src="images/check-plant-banner.png" alt="Check Banner" class="form-image">
                 <h2>Check on a Plant</h2>
-                <p>Enter the Plant ID to check the latest updates and status.</p>
+                <p class="form-subtext">Enter the Plant ID to check the latest updates and status.</p>
 
                 <div class="check-plant-container">
                     <!-- Left: Form -->
                     <form id="checkForm" class="check-form">
                     
-                            <label for="checkId">Plant ID:
-                                <span class="info-icon-container">
+                            <label for="checkName">Plant Name:
+                                <!-- <span class="info-icon-container">
                                 <img src="images/info-icon.png" alt="Info Icon" class="info-icon">
                                 <span class="tooltip-text">Located on plant pot name tag (ex. ESP1111).</span>
-                                </span>
+                                </span> -->
                             </label>
-                            <input type="text" id="checkId" name="checkId" required>
+                            <input type="text" id="checkName" name="checkName" required>
                         
                             <button type="submit" class="btn wide-btn">Submit</button>
                         

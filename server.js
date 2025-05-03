@@ -1,3 +1,4 @@
+console.log("starting");
 require('dotenv').config();
 
 const express = require('express');
@@ -12,6 +13,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log(`Connected to MongoDB Atlas`))
@@ -55,14 +61,15 @@ app.post('/check-plant', async (req, res) => {
 
 // Fetch plant data
 app.post('/fetch-plant-data', async (req, res) => {
-  const { device_id } = req.body;
+  const { plantName } = req.body;
 
-  if (!device_id) {
-    return res.status(400).json({ message: "Missing device_id" });
+  if (!plantName) {
+    return res.status(400).json({ message: "Missing plant name" });
   }
 
   try {
-    const plant = await Leaderboard.findOne({ device_id: new RegExp(`^${device_id}$`, 'i') });
+    const plant = await Leaderboard.findOne({ plantName: new RegExp(`^${plantName}$`, 'i') });
+
 
     if (!plant) {
       return res.status(404).json({ message: "Plant not found" });
@@ -79,6 +86,28 @@ app.post('/fetch-plant-data', async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+app.post('/check-plant-name', async (req, res) => {
+  const { plantName } = req.body;
+
+  if (!plantName) {
+    return res.status(400).json({ message: "Missing plant name" });
+  }
+
+  try {
+    const exists = await Leaderboard.findOne({ plantName: new RegExp(`^${plantName}$`, 'i') });
+
+    if (exists) {
+      return res.status(200).json({ exists: true });
+    } else {
+      return res.status(200).json({ exists: false });
+    }
+  } catch (err) {
+    console.error("Error checking plant name:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 // Update plant info
 app.post('/update', async (req, res) => {
@@ -129,6 +158,7 @@ app.get('/leaderboard', async (req, res) => {
     res.status(500).json({ message: "Failed to fetch leaderboard data." });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
