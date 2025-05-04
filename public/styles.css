@@ -1249,6 +1249,7 @@ form button {
   padding: 6px;
   text-align: center;
   margin-top: 24px;
+  height: 200px;
 }
 
 .stat-card.secondary {
