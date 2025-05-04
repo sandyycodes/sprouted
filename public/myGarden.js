@@ -1,6 +1,25 @@
 // myGarden.js
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  const toggleBtn = document.getElementById('navbar-toggle');
+  const navLinks = document.getElementById('navbar-links');
+
+  toggleBtn.addEventListener('click', (event) => {
+    event.stopPropagation(); // Prevent menu click from closing it
+    navLinks.classList.toggle('show');
+    toggleBtn.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (event) => {
+    const isClickInsideMenu = navLinks.contains(event.target) || toggleBtn.contains(event.target);
+    if (!isClickInsideMenu) {
+      navLinks.classList.remove('show');
+      toggleBtn.classList.remove('open');
+    }
+  });
+
+
   const registerForm = document.getElementById("registerForm");
   const checkForm = document.getElementById("checkForm");
 
