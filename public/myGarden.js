@@ -110,41 +110,77 @@ document.addEventListener("DOMContentLoaded", function () {
   checkForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const checkName = document.getElementById("checkName").value.trim();
-
-    // Clear previous data
+  
+    // Elements to update
+    const moistureStatus = document.getElementById("moistureStatus");
+    const humidityStatus = document.getElementById("humidityStatus");
+    const tempStatus = document.getElementById("tempStatus");
+  
+    // Reset UI
     moistureDisplay.textContent = "N/A";
     humidityDisplay.textContent = "N/A";
     tempDisplay.textContent = "N/A";
+    moistureStatus.textContent = "";
+    humidityStatus.textContent = "";
+    tempStatus.textContent = "";
+    moistureStatus.className = "status-text";
+    humidityStatus.className = "status-text";
+    tempStatus.className = "status-text";    
     plantTitle.textContent = "Plant Data";
-
+  
     try {
       const res = await fetch("/fetch-plant-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plantName: checkName })
       });
-
-      if (!res.ok) {
-        throw new Error("Plant name not found.");
-      }
-
+  
+      if (!res.ok) throw new Error("Plant name not found.");
+  
       const data = await res.json();
-
-      if (data.plantName && data.plantName.trim() !== "") {
-        plantTitle.textContent = `${data.plantName}'s Data`;
-      } else {
-        plantTitle.textContent = "Plant Data";
+  
+      plantTitle.textContent = data.plantName?.trim()
+        ? `${data.plantName}'s Data`
+        : "Plant Data";
+  
+      tempDisplay.textContent =
+        typeof data.temperature === "number" ? `${data.temperature} °C` : "N/A";
+      humidityDisplay.textContent =
+        typeof data.humidity === "number" ? `${data.humidity}%` : "N/A";
+      moistureDisplay.textContent =
+        typeof data.moisture === "number"
+          ? `${Math.round((data.moisture / 1015) * 100)}%`
+          : "N/A";
+  
+      // Update statuses
+      if (data.statuses) {
+        const applyStatus = (el, status) => {
+          el.textContent = ""; // Default to empty
+          el.className = "status-text";
+        
+          if (status === "Good") {
+            el.textContent = "Just Right";
+            el.classList.add("status-good");
+          } else if (status === "Low") {
+            el.textContent = "Too Low";
+            el.classList.add("status-low");
+          } else if (status === "High") {
+            el.textContent = "Too High";
+            el.classList.add("status-high");
+          }
+        };
+        
+  
+        applyStatus(tempStatus, data.statuses.temperature);
+        applyStatus(humidityStatus, data.statuses.humidity);
+        applyStatus(moistureStatus, data.statuses.moisture);
       }
-
-      tempDisplay.textContent = typeof data.temperature === "number" ? `${data.temperature} °C` : "N/A";
-      humidityDisplay.textContent = typeof data.humidity === "number" ? `${data.humidity}%` : "N/A";
-      moistureDisplay.textContent = typeof data.moisture === "number"
-        ? `${Math.round((data.moisture / 1015) * 100)}%`
-        : "N/A";
+  
     } catch (error) {
       showModal("Error", error.message, true);
     }
   });
+  
 
   const tooltipContainers = document.querySelectorAll('.info-icon-container');
 

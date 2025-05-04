@@ -59,7 +59,6 @@ app.post('/check-plant', async (req, res) => {
   }
 });
 
-// Fetch plant data
 app.post('/fetch-plant-data', async (req, res) => {
   const { plantName } = req.body;
 
@@ -70,22 +69,46 @@ app.post('/fetch-plant-data', async (req, res) => {
   try {
     const plant = await Leaderboard.findOne({ plantName: new RegExp(`^${plantName}$`, 'i') });
 
-
     if (!plant) {
       return res.status(404).json({ message: "Plant not found" });
     }
 
+    const { plantType, temperature, humidity, moisture } = plant;
+
+    // Define optimal ranges for each plant
+    const ranges = {
+      tomato:   { temp: [18, 30], humidity: [45, 75], moisture: [55, 85] },
+      basil:    { temp: [18, 28], humidity: [35, 65], moisture: [45, 75] },
+      spinach:  { temp: [12, 24], humidity: [35, 75], moisture: [65, 95] }
+    };
+    
+
+    const range = ranges[plantType?.toLowerCase()] || {};
+
+    function getStatus(value, [low, high]) {
+      if (typeof value !== 'number') return "N/A";
+      if (value < low) return "Low";
+      if (value > high) return "High";
+      return "Good";
+    }
+
     res.status(200).json({
       plantName: plant.plantName || "",
-      moisture: plant.moisture,
-      humidity: plant.humidity,
-      temperature: plant.temperature
+      temperature,
+      humidity,
+      moisture,
+      statuses: {
+        temperature: getStatus(temperature, range.temp || [0, 100]),
+        humidity: getStatus(humidity, range.humidity || [0, 100]),
+        moisture: getStatus(moisture, range.moisture || [0, 100])
+      }
     });
   } catch (err) {
     console.error("Error fetching plant data:", err);
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 app.post('/check-plant-name', async (req, res) => {
   const { plantName } = req.body;
@@ -108,6 +131,33 @@ app.post('/check-plant-name', async (req, res) => {
   }
 });
 
+function getScoreForPlant(plantType, temperature, humidity, moisture) {
+  const ranges = {
+    tomato:   { temp: [20, 27], humidity: [50, 70], moisture: [60, 80] },
+    basil:    { temp: [21, 26], humidity: [40, 60], moisture: [50, 70] },
+    spinach:  { temp: [15, 21], humidity: [40, 70], moisture: [70, 90] }
+  };
+
+  const plant = ranges[plantType?.toLowerCase()];
+  if (!plant) return null;
+
+  let score = 0;
+
+  function scoreRange(value, [low, high], weight = 1) {
+    if (typeof value !== "number") return 0;
+    if (value >= low && value <= high) return 100 * weight;
+    const dist = value < low ? low - value : value - high;
+    return Math.max(0, 100 - dist * 10) * weight;
+  }
+
+  score += scoreRange(temperature, plant.temp, 0.4);
+  score += scoreRange(humidity, plant.humidity, 0.3);
+  score += scoreRange(moisture, plant.moisture, 0.3);
+
+  return Math.round(score);
+}
+
+
 
 // Update plant info
 app.post('/update', async (req, res) => {
@@ -118,10 +168,8 @@ app.post('/update', async (req, res) => {
     return res.status(400).json({ message: "Missing device ID" });
   }
 
-  const score =
-    (typeof temperature === 'number' && typeof humidity === 'number' && typeof moisture === 'number')
-      ? (100 - Math.abs(temperature - 25)) + (humidity / 2) + (moisture / 10)
-      : null;
+  const score = getScoreForPlant(plantType, temperature, humidity, moisture);
+
 
   const updateFields = {
     device_id,

@@ -404,6 +404,8 @@ html {
 }
 
 
+
+
 /* === MY GARDEN PAGE STYLES === */
 
 .garden-page {
@@ -743,6 +745,17 @@ form button {
   font-size: 18px;
   font-weight: 600;
   color: #333;
+}
+
+.status-text {
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+.status-low, .status-high {
+  color: #D8000C;
+}
+.status-good {
+  color: #2D7A2C;
 }
 
 /*About Page*/
